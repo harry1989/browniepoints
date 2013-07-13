@@ -183,7 +183,7 @@
           <div class="large-4 columns">
             <div class="row collapse">
               <div class="large-6 columns">
-                <input type="text" id="aqUrl" disabled placeholder="Upload Image">  
+                <input type="text" id="aqUrl" placeholder="Upload Image">  
               </div> 
               <div class="large-6 columns">
                 <a href="#" class="button postfix">CHOOSE...</a>  

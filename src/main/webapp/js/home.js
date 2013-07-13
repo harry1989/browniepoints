@@ -119,7 +119,7 @@ function addQuestion() {
 	var title = $('#aqTitle').val();
 	var desc = $('#aqDesc').val();
 	var trivia = $('#aqTrivia').val();
-	var url = $('#aqUrl').val();
+	var furl = $('#aqUrl').val();
 	var option1 = $('#aqOption1').val();
 	var option2 = $('#aqOption2').val();
 	var option3 = $('#aqOption3').val();
@@ -133,7 +133,7 @@ function addQuestion() {
 	var url = 'title=' + encodeURIComponent(title);
 	url += '&desc=' + encodeURIComponent(desc);
 	url += '&trivia=' + encodeURIComponent(trivia);
-	url += '&url=' + encodeURIComponent(url);
+	url += '&url=' + encodeURIComponent(furl);
 	url += '&option1=' + encodeURIComponent(option1);
 	url += '&option2=' + encodeURIComponent(option2);
 	url += '&option3=' + encodeURIComponent(option3);
