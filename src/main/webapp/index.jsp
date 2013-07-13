@@ -155,7 +155,7 @@
             <label class="inline">FULL QUESTION</label>
           </div>
           <div class="large-10 columns">
-            <textarea placeholder="Enter the description of your question here"></textarea>
+            <textarea id="aqDesc" placeholder="Enter the description of your question here"></textarea>
           </div>
         </div>
         <div class="row">
@@ -163,17 +163,17 @@
             <label class="inline">TYPE</label>
           </div>
           <div class="large-4 columns">
-            <select id="customDropdown1" class="large-6 columns">
+            <select id="aqTitle" class="large-6 columns">
                 <option selected="selected">Guess the dish</option>
                 <option>Guess the ingredients</option>
                 <option>Guess the place</option>
             </select>
           </div>
           <div class="large-2 columns text-right">
-            <label class="inline">OPTION A</label>
+            <label class="inline">OPTION 1</label>
           </div>
           <div class="large-4 columns">
-            <input type="text" placeholder="">
+            <input id="aqOption1" type="text" placeholder="">
           </div>
         </div>
         <div class="row">
@@ -183,7 +183,7 @@
           <div class="large-4 columns">
             <div class="row collapse">
               <div class="large-6 columns">
-                <input type="text" disabled placeholder="Upload Image">  
+                <input type="text" id="aqUrl" disabled placeholder="Upload Image">  
               </div> 
               <div class="large-6 columns">
                 <a href="#" class="button postfix">CHOOSE...</a>  
@@ -191,10 +191,10 @@
             </div>            
           </div>
           <div class="large-2 columns text-right">
-            <label class="inline">OPTION B</label>
+            <label class="inline">OPTION 2</label>
           </div>
           <div class="large-4 columns">
-            <input type="text" placeholder="">
+            <input type="text" id="aqOption2" placeholder="">
           </div>
         </div>     
         <div class="row">
@@ -202,13 +202,13 @@
             <label class="inline">HOTEL NAME</label>
           </div>
           <div class="large-4 columns">
-            <input type="text" placeholder="Start typing to autocomplete...">
+            <input type="text" id="aqHotelName" placeholder="Start typing to autocomplete...">
           </div>
           <div class="large-2 columns text-right">
-            <label class="inline">OPTION C</label>
+            <label class="inline">OPTION 3</label>
           </div>
           <div class="large-4 columns">
-            <input type="text" placeholder="">
+            <input type="text" id="aqOption3" placeholder="">
           </div>
         </div> 
         <div class="row">
@@ -216,31 +216,50 @@
             <label class="inline">CORRECT ANSWER</label>
           </div>
           <div class="large-4 columns">
-            <select id="correctAnswer" class="large-6 columns">
-                <option selected="selected">Option A</option>
-                <option>Option B</option>
-                <option>Option C</option>
-                <option>Option D</option>
+            <select id="aqAnswer" class="large-6 columns">
+                <option selected="selected">Option 1</option>
+                <option>Option 2</option>
+                <option>Option 3</option>
+                <option>Option 4</option>
             </select>
           </div>
           <div class="large-2 columns text-right">
-            <label class="inline">OPTION D</label>
+            <label class="inline">OPTION 4</label>
           </div>
           <div class="large-4 columns">
-            <input type="text" placeholder="">
+            <input type="text" id="aqOption4" placeholder="">
+          </div>
+        </div>  
+        <div class="row">
+          <div class="large-2 columns text-right">
+            <label class="inline">CUISINE</label>
+          </div>
+          <div class="large-4 columns">
+            <select id="aqCuisine" class="large-6 columns">
+                <option selected="selected">Multi</option>
+                <option>Asian</option>
+                <option>Continental</option>
+                <option>Italian</option>
+            </select>
+          </div>
+          <div class="large-2 columns text-right">
+            <label class="inline">TRIVIA</label>
+          </div>
+          <div class="large-4 columns">
+            <input type="text" id="aqTrivia" placeholder="">
           </div>
         </div>  
         <hr/>
         <div class="row">
           <span class="y-cap">All fields are mandatory. Questions will be approved by moderators before being added.</span>
           <ul class="inline-list right">
-            <li><a href="#." class="button success small">SUBMIT</a></li>
+            <li><a href="javascript:addQuestion();" class="button success small">SUBMIT</a></li>
           </ul>
           <a class="close-reveal-modal">&#215;</a>
         </div>                                                                                                                   
       </form>
     </div>
- 
+
     <!-- ************************************* -->
     <!--  ALL CLIENT SIDE HANDLEBARS TEMPLATES --> 
     <!-- ************************************* -->
@@ -353,7 +372,9 @@
                       class="foundicon-google-plus y-social">&nbsp;&nbsp;&nbsp;</a>                  
                   </div>
                 </li>
+                {{#if correct}}
                 <li><a href="#." class="button alert small">UNCLAIM</a></li>
+                {{/if}}
                 <li><a href="#."class="button small">PRINT</a></li>
               </ul>
             </div>
@@ -361,8 +382,6 @@
           <a class="close-reveal-modal">&#215;</a>
         </div>
     </script>
-
-
 
     
     <script>

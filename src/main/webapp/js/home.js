@@ -60,9 +60,9 @@ function submitAnswer(qid) {
 	var uid = 1;
 	var ansid = 1;
 	var anstext = '';
-	
+
 	for ( var i = 1; i <= 4; i++) {
-		var  el = '#lradio' + i + '_' + qid;
+		var el = '#lradio' + i + '_' + qid;
 		if ($(el + ' span').hasClass('checked')) {
 			anstext = $(el).text().trim();
 			break;
@@ -89,18 +89,17 @@ function handleAnswer(response) {
 	console.log('In handleAnswer...');
 	var source = $('#answer-template').html();
 	var template = Handlebars.compile(source);
-	
-	if(response.answer_status === 'Y') {
+
+	if (response.answer_status === 'Y') {
 		response.header = '<span class="y-correct">That\'s correct!</span>';
 		response.correct = 1;
-	}
-	else {
+	} else {
 		response.header = '<span class="y-incorrect">Sorry that was incorrect!</span>';
 		response.correct = 0;
 	}
-	
+
 	var html = template(response);
-	$('#answer').html(html);	
+	$('#answer').html(html);
 	$('#answer > div').foundation('reveal', 'open');
 
 }
@@ -108,10 +107,45 @@ function handleAnswer(response) {
 function shuffleQuestions() {
 	console.log('In shuffleQuestions...');
 	var uid = 1;
-	
+
 	$.get('/q?uid=' + uid, function(data) {
 		questions = data;
 		loadQuestions();
 	});
-	
+
+}
+
+function addQuestion() {
+	var title = $('#aqTitle').val();
+	var desc = $('#aqDesc').val();
+	var trivia = $('#aqTrivia').val();
+	var url = $('#aqUrl').val();
+	var option1 = $('#aqOption1').val();
+	var option2 = $('#aqOption2').val();
+	var option3 = $('#aqOption3').val();
+	var option4 = $('#aqOption4').val();
+	var a = $('#aqAnswer').val().replace(' ', '');
+	var answer = $('#aq' + a).val();
+	var cuisine = $('#aqCuisine').val().toLowerCase();
+	var name = $('#aqHotelName').val();
+	var uid = 1;
+
+	var url = 'title=' + encodeURIComponent(title);
+	url += '&desc=' + encodeURIComponent(desc);
+	url += '&trivia=' + encodeURIComponent(trivia);
+	url += '&url=' + encodeURIComponent(url);
+	url += '&option1=' + encodeURIComponent(option1);
+	url += '&option2=' + encodeURIComponent(option2);
+	url += '&option3=' + encodeURIComponent(option3);
+	url += '&option4=' + encodeURIComponent(option4);
+	url += '&answer=' + encodeURIComponent(answer);
+	url += '&cuisine=' + encodeURIComponent(cuisine);
+	url += '&name=' + encodeURIComponent(name);
+	url += '&uid=' + uid;
+
+	console.log(url);
+	$.post('/aq', url, function() {
+		console.log('Added!');
+	});
+
 }
