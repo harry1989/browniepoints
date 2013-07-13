@@ -13,7 +13,7 @@ import main.java.browniepoints.model.Coupon;
 
 public class CouponHelper implements SQLConverter {
 
-	private static Connection conn = null;
+	private static Connection conn = ConnectionProvider.getConnection();
 	private static final CouponHelper instance = new CouponHelper();
 	
 	private static final String INSERT_SQL = "insert into public.\"coupon\" "
@@ -23,7 +23,7 @@ public class CouponHelper implements SQLConverter {
 			+ "cid, qid, title, \"desc\", quota, discount, points, start_date, end_date "
 			+ "from public.\"coupon\"";
 	private static final String UPDATE_SQL = "update public.\"coupon\" "
-			+ "set qid = ?, title = ?, desc = ?, quota = ?, discount = ?, "
+			+ "set qid = ?, title = ?, \"desc\" = ?, quota = ?, discount = ?, "
 			+ "points = ?, start_date = ?, end_date = ? where cid = ?";
 	
 	Map<Integer, Coupon> couponByCID = new HashMap<Integer, Coupon>();

@@ -1,6 +1,12 @@
 package main.java.browniepoints.model;
 
-public class Coupon {
+public class Coupon implements Cloneable {
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
+	}
+
 	@Override
 	public String toString() {
 		return "Coupon [cid=" + cid + ", qid=" + qid + ", title=" + title
@@ -124,5 +130,9 @@ public class Coupon {
 
 	public boolean hasCid() {
 		return this.cid != null;
+	}
+	
+	public Coupon copyOf() throws CloneNotSupportedException {
+		return (Coupon) this.clone();
 	}
 }

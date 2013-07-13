@@ -15,7 +15,7 @@ import main.java.browniepoints.util.Util;
 public class AttemptHelper implements SQLConverter {
 	private static final AttemptHelper instance =  new AttemptHelper();
 
-	private static final Connection conn = ConnectionProvider.getConnection();
+	private static Connection conn = ConnectionProvider.getConnection();
 	
 	private static final String INSERT_SQL = "insert into public.\"attempt\" "
 			+ "(uid, qid, result, date, vid) "
@@ -36,6 +36,9 @@ public class AttemptHelper implements SQLConverter {
 	}
 	
 	private void init() {
+		if (null == conn) {
+			conn = ConnectionProvider.getConnection();
+		}
 		List<Attempt> attempts = select();
 		
 		attemptByUID.clear();
