@@ -1,11 +1,17 @@
 package main.java.browniepoints.model;
 
-public class Question {
+public class Question implements Cloneable {
 	private Integer qid;
 	private Integer uid;
 	private String title;
 	private String desc;
 	private String trivia;
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
+	}
+
 	private String url_type;
 	@Override
 	public String toString() {

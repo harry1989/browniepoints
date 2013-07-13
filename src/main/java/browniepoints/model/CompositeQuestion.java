@@ -61,7 +61,8 @@ public class CompositeQuestion implements Cloneable {
 
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return super.clone();
+		CompositeQuestion obj = (CompositeQuestion) super.clone();
+		obj.setQ((Question) this.q.clone());
+		return obj;
 	}
 }

@@ -292,10 +292,12 @@ public class QuestionHelper implements SQLConverter {
 		return getRandomQuestions(this.questions);
 	}
 
-	public void likeQuestion(Question q) {
-		q.setLikes(q.getLikes() + 1);
-		insert(q);
-	}
+//	public void likeQuestion(Integer qid) {
+//		if (null == qid) return;
+//		Question q = questionByQID.get(qid);
+//		q.setLikes(q.getLikes() + 1);
+//		insert(q);
+//	}
 
 	public CompositeQuestion evaluateAnswer(final Integer uid, Integer qid,
 			String userAnswer) throws Exception {
