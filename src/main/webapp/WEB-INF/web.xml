@@ -3,35 +3,36 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-  	<servlet-name>QuestionServlet</servlet-name>
-  	<display-name>QuestionServlet</display-name>
-  	<description></description>
-  	<servlet-class>main.java.browniepoints.servlet.QuestionServlet</servlet-class>
-  </servlet>
-  <servlet>
-  	<servlet-name>LoginServlet</servlet-name>
-  	<display-name>LoginServlet</display-name>
-  	<description></description>
-  	<servlet-class>main.java.browniepoints.servlet.LoginServlet</servlet-class>
-  </servlet>
-  <servlet>
-  	<servlet-name>AnswerServlet</servlet-name>
-  	<display-name>AnswerServlet</display-name>
-  	<description></description>
-  	<servlet-class>main.java.browniepoints.servlet.AnswerServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>QuestionServlet</servlet-name>
-  	<url-pattern>/q</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-  	<servlet-name>LoginServlet</servlet-name>
-  	<url-pattern>/</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-  	<servlet-name>AnswerServlet</servlet-name>
-  	<url-pattern>/a</url-pattern>
-  </servlet-mapping>
+	<display-name>Archetype Created Web Application</display-name>
+	<servlet>
+		<servlet-name>QuestionServlet</servlet-name>
+		<display-name>QuestionServlet</display-name>
+		<description></description>
+		<servlet-class>main.java.browniepoints.servlet.QuestionServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<display-name>LoginServlet</display-name>
+		<description></description>
+		<servlet-class>main.java.browniepoints.servlet.LoginServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AnswerServlet</servlet-name>
+		<display-name>AnswerServlet</display-name>
+		<description></description>
+		<servlet-class>main.java.browniepoints.servlet.AnswerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>QuestionServlet</servlet-name>
+		<url-pattern>/q</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/main</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AnswerServlet</servlet-name>
+		<url-pattern>/a</url-pattern>
+	</servlet-mapping>
+
 </web-app>

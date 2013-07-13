@@ -107,39 +107,9 @@
 
     </div>
     
-    <!-- Answer 1 -->
-    <div id="answer1" class="reveal-modal medium">
-      <div class="row">
-        <div class="large-6 columns">
-          <img alt="pic3" src="http://placehold.it/400x400&text=Dish1" />
-        </div> 
-        <div class="large-6 columns">
-          <div class="panel">
-            Correct Answer: Okra Masala! <br/>
-            You win a 25% discount coupon at <a href="#.">Avasa Hotels</a>! <br/>
-            Voucher code: <b>G3462HYT23</b><br/>
-            A copy of this has been emailed to you.
-          </div>
-          <div class="panel y-hint">
-            <b>Trivia</b>: <a href="#.">Okra Masala</a> was prepared when I had some idea of what to type here.
-          </div>
-              <ul class="inline-list right">
-                <li>
-                  <div class="row">
-                    <a title="Like on Facebook"target="_blank" 
-                      href="http://www.facebook.com/sharer/sharer.php?u=http://bonappetit.com" 
-                      class="foundicon-facebook y-social">&nbsp;&nbsp;&nbsp;</a>
-                    <a title="+1 on Google+"target="_blank" 
-                      href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://bonappetit.com" 
-                      class="foundicon-google-plus y-social">&nbsp;&nbsp;&nbsp;</a>                  
-                  </div>
-                </li>               
-                <li><a href="#." class="button alert small">UNCLAIM</a></li>
-                <li><a href="#."class="button small">PRINT</a></li>          
-              </ul>  
-        </div> 
-      </div>
-      <a class="close-reveal-modal">&#215;</a>
+    <!-- Any Answer -->
+    <div id="answers">
+    
     </div>
     
     <!-- How It Works -->
@@ -347,6 +317,43 @@
       </div>
     </script>
     
+    <!-- Answer template -->
+    <script id="answer-template" type="text/handlebars-template">
+       <div id="answer1" class="reveal-modal medium">
+          <div class="row">
+            <div class="large-6 columns">
+              <img alt="pic3" src="http://placehold.it/400x400&text=Dish1" />
+            </div> 
+            <div class="large-6 columns">
+              <div class="panel">
+                Correct Answer: Okra Masala! <br/>
+                You win a 25% discount coupon at <a href="#.">Avasa Hotels</a>! <br/>
+                Voucher code: <b>G3462HYT23</b><br/>
+                A copy of this has been emailed to you.
+              </div>
+              <div class="panel y-hint">
+                <b>Trivia</b>: <a href="#.">Okra Masala</a> was prepared when I had some idea of what to type here.
+              </div>
+                  <ul class="inline-list right">
+                    <li>
+                      <div class="row">
+                        <a title="Like on Facebook"target="_blank" 
+                          href="http://www.facebook.com/sharer/sharer.php?u=http://bonappetit.com" 
+                          class="foundicon-facebook y-social">&nbsp;&nbsp;&nbsp;</a>
+                        <a title="+1 on Google+"target="_blank" 
+                          href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://bonappetit.com" 
+                          class="foundicon-google-plus y-social">&nbsp;&nbsp;&nbsp;</a>                  
+                      </div>
+                    </li>               
+                    <li><a href="#." class="button alert small">UNCLAIM</a></li>
+                    <li><a href="#."class="button small">PRINT</a></li>          
+                  </ul>  
+            </div> 
+          </div>
+          <a class="close-reveal-modal">&#215;</a>
+        </div>
+    </script>
+    
     <script>
       document.write('<script src=js/vendor/' +
       ('__proto__' in {} ? 'zepto' : 'jquery') +
@@ -354,7 +361,7 @@
     </script>
     <script src="js/foundation.min.js"></script>
     <script>
-     $(document).foundation();      
+      $(document).foundation();      
     </script>
     <script src="js/home.js"></script>
   </body>
