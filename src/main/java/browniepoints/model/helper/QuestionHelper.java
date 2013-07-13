@@ -22,7 +22,7 @@ import main.java.browniepoints.util.Util;
 public class QuestionHelper implements SQLConverter {
 
 	private static final QuestionHelper instance = new QuestionHelper();
-	private static Connection conn = null;
+	private static Connection conn = ConnectionProvider.getConnection();
 	private static final int VOUCHER_LEN = 10;
 
 	private static final String INSERT_SQL = "insert into public.\"question\" "
@@ -34,7 +34,7 @@ public class QuestionHelper implements SQLConverter {
 			+ "option4, answer, rid, cuisine, likes, played, creation_date, approved_by"
 			+ "from public.\"question\"";
 	private static final String UPDATE_SQL = "update public.\"question\" "
-			+ "set uid = ?, title = ?, desc = ?, trivia = ?, "
+			+ "set uid = ?, title = ?, \"desc\" = ?, trivia = ?, "
 			+ "url_type = ?, url = ?, option1 = ?, option2 = ?, option3 = ?, "
 			+ "option4 = ?, answer = ?, rid = ?, cuisine = ?, likes = ?,"
 			+ "played = ?, creation_date = ?, approved_by = ? where qid = ?";
@@ -82,7 +82,7 @@ public class QuestionHelper implements SQLConverter {
 			}
 			Util.addToMap(questionByCuisine, cuisine, curr);
 
-			if (curr.getC().hasCid()) {
+			if (curr.getC().hasCid() && curr.getC().getQuota() > 0) {
 				offerQuestions.add(curr);
 			} else {
 				noOfferQuestions.add(curr);
@@ -292,12 +292,16 @@ public class QuestionHelper implements SQLConverter {
 		return getRandomQuestions(this.questions);
 	}
 
-//	public void likeQuestion(Integer qid) {
-//		if (null == qid) return;
-//		Question q = questionByQID.get(qid);
-//		q.setLikes(q.getLikes() + 1);
-//		insert(q);
-//	}
+	public void likeQuestion(Integer qid) {
+		if (null == qid)
+			return;
+		if (!questionByQID.containsKey(qid))
+			return;
+
+		Question q = questionByQID.get(qid).getQ();
+		q.setLikes(q.getLikes() + 1);
+		update(q);
+	}
 
 	public CompositeQuestion evaluateAnswer(final Integer uid, Integer qid,
 			String userAnswer) throws Exception {
@@ -328,8 +332,21 @@ public class QuestionHelper implements SQLConverter {
 					VoucherHelper.getInstance().insert(cid, uid, code);
 				}
 			}).start();
+
+			ret.getC().setQuota(ret.getC().getQuota() - 1);
+			if (ret.getC().getQuota() == 0) {
+				offerQuestions.remove(ret);
+				noOfferQuestions.add(ret);
+			}
+			final Coupon newC = ret.getC().copyOf();
+			new Thread(new Runnable() {
+				public void run() {
+					CouponHelper.getInstance().update(newC);
+				}
+			}).start();
 		} else {
 			ret.setAnswer_status("N");
+			ret.setVoucher_code("");
 		}
 
 		// Insert into attempts table.
@@ -355,7 +372,14 @@ public class QuestionHelper implements SQLConverter {
 		// e.printStackTrace();
 		// }
 
-		System.out.println(QuestionHelper.getInstance().evaluateAnswer(1, 7,
-				"Barbeque-Nation"));
+		// System.out.println(QuestionHelper.getInstance().evaluateAnswer(1, 7,
+		// "Barbeque-Nation"));
+
+		// QuestionHelper.getInstance().likeQuestion(2);
+		List<CompositeQuestion> lst = QuestionHelper.getInstance()
+				.getQuestionsForUser(1);
+		for (CompositeQuestion q : lst) {
+			System.out.println(q);
+		}
 	}
 }

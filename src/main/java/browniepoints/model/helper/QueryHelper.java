@@ -54,6 +54,7 @@ public class QueryHelper {
 		
 		PreparedStatement stmt = null;
 		try {
+			System.out.println(sql);
 			stmt = conn.prepareStatement(sql);
 			converter.setColumnsForUpdate(entity, stmt);
 			stmt.executeUpdate();

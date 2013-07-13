@@ -38,7 +38,7 @@ public class AnswerServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void service(HttpServletRequest request,
+	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String qid = request.getParameter("qid");
 		String answer = request.getParameter("a");
