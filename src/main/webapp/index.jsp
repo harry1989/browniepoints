@@ -69,7 +69,7 @@
     <!-- Shuffle -->
     <div class="row">&nbsp;</div>
     <div class="row text-center">
-      <a href="#." title="Shuffle this question set" class="button small success y-shuffle">SHUFFLE</a>    
+      <a href="javascript:shuffleQuestions();" title="Shuffle this question set" class="button small success y-shuffle">SHUFFLE</a>    
     </div>
     
     <!-- Footer -->
@@ -108,7 +108,7 @@
     </div>
     
     <!-- Any Answer -->
-    <div id="answers">
+    <div id="answer">
     
     </div>
     
@@ -269,23 +269,23 @@
               <div class="y-hint">{{q.desc}}</div>
               <br/><br/>
               <form class="custom">
-                <label for="radio1">
-                <input name="radio1" type="radio" id="radio1" checked style="display:none;">
+                <label for="radio1" id="lradio1_{{q.qid}}">
+                <input name="radio1" type="radio" id="radio1" style="display:none;">
                 <span class="custom radio"></span> &nbsp;{{q.option1}}
                 </label>
                 <br/>
-                <label for="radio1">
+                <label for="radio1" id="lradio2_{{q.qid}}">
                 <input name="radio1" type="radio" id="radio2" style="display:none;">
                 <span class="custom radio"></span> &nbsp;{{q.option2}}
                 </label>
                 <br/>
-                <label for="radio1">          
+                <label for="radio1" id="lradio3_{{q.qid}}">          
                 <input name="radio1" type="radio" id="radio3" style="display:none;">
                 <span class="custom radio"></span> &nbsp;{{q.option3}}
                 </label>
                 <br/>
-                <label for="radio1">          
-                <input name="radio1" type="radio" id="radio4" style="display:none;">
+                <label for="radio1" id="lradio4_{{q.qid}}">          
+                <input name="radio1" type="radio" id="radio3" style="display:none;">
                 <span class="custom radio"></span> &nbsp;{{q.option4}}
                 </label>
               </form>
@@ -309,7 +309,9 @@
                       class="foundicon-google-plus y-social">&nbsp;&nbsp;&nbsp;</a>                  
                   </div>
                 </li>              
-                <li data-reveal-id="answer{{qid}}"><a href="#." class="button success small">SUBMIT!</a></li>
+                <li>
+                    <a href="javascript:submitAnswer({{q.qid}});" class="button success small">SUBMIT!</a>
+                </li>
               </ul>
           </div>
         </div>
@@ -319,40 +321,49 @@
     
     <!-- Answer template -->
     <script id="answer-template" type="text/handlebars-template">
-       <div id="answer1" class="reveal-modal medium">
+        <div id="answer{{q.qid}}" class="reveal-modal medium">
           <div class="row">
             <div class="large-6 columns">
-              <img alt="pic3" src="http://placehold.it/400x400&text=Dish1" />
-            </div> 
+              <img alt="pic3" src="{{q.url}}" />
+            </div>
             <div class="large-6 columns">
               <div class="panel">
-                Correct Answer: Okra Masala! <br/>
-                You win a 25% discount coupon at <a href="#.">Avasa Hotels</a>! <br/>
-                Voucher code: <b>G3462HYT23</b><br/>
-                A copy of this has been emailed to you.
+                {{{header}}}<br/><br/>
+                Correct Answer: <b>{{q.answer}}</b><br/><br/>                
+                {{#if correct}}
+                <b>{{c.desc}}</b> <br/><br/>
+                <div>Voucher code: <span class='y-voucher'>{{voucher_code}}</span><br/><br/>
+                  A copy of this has been emailed to you.
+                </div>
+                {{/if}}
               </div>
+              {{#if q.trivia}}
               <div class="panel y-hint">
-                <b>Trivia</b>: <a href="#.">Okra Masala</a> was prepared when I had some idea of what to type here.
+                <b>Trivia</b>: {{q.trivia}}
               </div>
-                  <ul class="inline-list right">
-                    <li>
-                      <div class="row">
-                        <a title="Like on Facebook"target="_blank" 
-                          href="http://www.facebook.com/sharer/sharer.php?u=http://bonappetit.com" 
-                          class="foundicon-facebook y-social">&nbsp;&nbsp;&nbsp;</a>
-                        <a title="+1 on Google+"target="_blank" 
-                          href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://bonappetit.com" 
-                          class="foundicon-google-plus y-social">&nbsp;&nbsp;&nbsp;</a>                  
-                      </div>
-                    </li>               
-                    <li><a href="#." class="button alert small">UNCLAIM</a></li>
-                    <li><a href="#."class="button small">PRINT</a></li>          
-                  </ul>  
-            </div> 
+              {{/if}}
+              <ul class="inline-list right">
+                <li>
+                  <div class="row">
+                    <a title="Like on Facebook"target="_blank" 
+                      href="http://www.facebook.com/sharer/sharer.php?u=http://bonappetit.com" 
+                      class="foundicon-facebook y-social">&nbsp;&nbsp;&nbsp;</a>
+                    <a title="+1 on Google+"target="_blank" 
+                      href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://bonappetit.com" 
+                      class="foundicon-google-plus y-social">&nbsp;&nbsp;&nbsp;</a>                  
+                  </div>
+                </li>
+                <li><a href="#." class="button alert small">UNCLAIM</a></li>
+                <li><a href="#."class="button small">PRINT</a></li>
+              </ul>
+            </div>
           </div>
           <a class="close-reveal-modal">&#215;</a>
         </div>
     </script>
+
+
+
     
     <script>
       document.write('<script src=js/vendor/' +

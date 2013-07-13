@@ -12,8 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import main.java.browniepoints.model.CompositeQuestion;
+import main.java.browniepoints.model.helper.AttemptHelper;
+import main.java.browniepoints.model.helper.CouponHelper;
 import main.java.browniepoints.model.helper.QuestionHelper;
+import main.java.browniepoints.model.helper.UserHelper;
+import main.java.browniepoints.model.helper.VoucherHelper;
 import main.java.browniepoints.util.Util;
 
 import org.expressme.openid.Association;
@@ -47,6 +53,7 @@ public class LoginServlet extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
+		// TODO Auto-generated method stub
 		super.init(config);
 		manager = new OpenIdManager();
 		manager.setRealm("http://glacial-shore-4255.herokuapp.com/");

@@ -327,11 +327,11 @@ public class QuestionHelper implements SQLConverter {
 			final String code = vCode.substring(0, length);
 			ret.setVoucher_code(code);
 
-			new Thread(new Runnable() {
-				public void run() {
-					VoucherHelper.getInstance().insert(cid, uid, code);
-				}
-			}).start();
+			//new Thread(new Runnable() {
+				//public void run() {
+					//VoucherHelper.getInstance().insert(cid, uid, code);
+				//}
+			//}).start();
 
 			ret.getC().setQuota(ret.getC().getQuota() - 1);
 			if (ret.getC().getQuota() == 0) {
@@ -339,11 +339,11 @@ public class QuestionHelper implements SQLConverter {
 				noOfferQuestions.add(ret);
 			}
 			final Coupon newC = ret.getC().copyOf();
-			new Thread(new Runnable() {
+/*			new Thread(new Runnable() {
 				public void run() {
 					CouponHelper.getInstance().update(newC);
 				}
-			}).start();
+			}).start();*/
 		} else {
 			ret.setAnswer_status("N");
 			ret.setVoucher_code("");

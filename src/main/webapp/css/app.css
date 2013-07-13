@@ -36,3 +36,11 @@
   font-size: 18px;
   
 }
+
+.y-correct {
+	color: green !important;
+}
+
+.y-incorrect {
+	color: red !important;
+}
