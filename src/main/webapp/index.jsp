@@ -271,55 +271,58 @@
       </form>
     </div>
  
-	<!--  ALL CLIENT SIDE HANDLEBARS TEMPLATES --> 
+    <!-- ************************************* -->
+    <!--  ALL CLIENT SIDE HANDLEBARS TEMPLATES --> 
+    <!-- ************************************* -->
+
     <script id="question-template" type="text/x-handlebars-template">
-      <div class="large-4 columns" data-reveal-id="question{{qid}}">
-        <img alt="Question Picture" src="{{url}}" />
+      <div class="large-4 columns" data-reveal-id="question{{q.qid}}">
+        <img alt="Question Picture" src="{{q.url}}" />
         <div class="panel">
-          <h6>{{title}}</h6>
-          <p class="subheader"><span class="y-hint">{{coupon_title}}</span></p>
+          <h6>{{q.title}}</h6>
+          <p class="subheader"><span class="y-hint">{{c.title}}</span></p>
         </div>
       </div>
-	</script> 
-	
-	<script id="full-question-template" type="text/handlebars-template">
-      <div id="question{{qid}}" class="reveal-modal large">
+    </script> 
+    
+    <script id="full-question-template" type="text/handlebars-template">
+      <div id="question{{q.qid}}" class="reveal-modal large">
         <div class="row">
           <h3>{{title}}</h3>
         </div>
         <div class="large-6 columns">
-          <img alt="pic3" src="{{url}}" />
+          <img alt="pic3" src="{{q.url}}" />
         </div>
         <div class="large-6 columns">
           <div class="row">
             <div class="panel">
-              <div class="y-hint">{{desc}}</div>
+              <div class="y-hint">{{q.desc}}</div>
               <br/><br/>
               <form class="custom">
                 <label for="radio1">
                 <input name="radio1" type="radio" id="radio1" checked style="display:none;">
-                <span class="custom radio"></span> &nbsp;{{option1}}
+                <span class="custom radio"></span> &nbsp;{{q.option1}}
                 </label>
                 <br/>
                 <label for="radio1">
                 <input name="radio1" type="radio" id="radio2" style="display:none;">
-                <span class="custom radio"></span> &nbsp;{{option2}}
+                <span class="custom radio"></span> &nbsp;{{q.option2}}
                 </label>
                 <br/>
                 <label for="radio1">          
                 <input name="radio1" type="radio" id="radio3" style="display:none;">
-                <span class="custom radio"></span> &nbsp;{{option3}}
+                <span class="custom radio"></span> &nbsp;{{q.option3}}
                 </label>
                 <br/>
                 <label for="radio1">          
                 <input name="radio1" type="radio" id="radio4" style="display:none;">
-                <span class="custom radio"></span> &nbsp;{{option4}}
+                <span class="custom radio"></span> &nbsp;{{q.option4}}
                 </label>
               </form>
             </div>
           </div>
           <div class="row">
-            <div class="panel">{{coupon_title}}</div>
+            <div class="panel">{{c.title}}</div>
           </div>
           <div class="row">&nbsp;</div>
           <div class="row">&nbsp;</div>
@@ -342,7 +345,7 @@
         </div>
         <a class="close-reveal-modal">&#215;</a>
       </div>
-	</script>
+    </script>
     
     <script>
       document.write('<script src=js/vendor/' +
