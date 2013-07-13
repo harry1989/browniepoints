@@ -42,16 +42,29 @@ public class AnswerServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String qid = request.getParameter("qid");
 		String answer = request.getParameter("a");
-		
+		String uid = request.getParameter("uid");
+
 		System.out.println(qid + ", " + answer);
 
-		if (Util.isNullOrEmpty(qid) || Util.isNullOrEmpty(answer)) {
+		if (Util.isNullOrEmpty(qid) || Util.isNullOrEmpty(answer)
+				|| Util.isNullOrEmpty(uid)) {
 			request.setAttribute("response", null);
 			return;
 		}
 
-		CompositeQuestion ret = QuestionHelper.getInstance().evaluateAnswer(
-				Integer.parseInt(qid), answer);
+		CompositeQuestion ret = null;
+		try {
+			ret = QuestionHelper.getInstance().evaluateAnswer(
+					Integer.parseInt(uid), Integer.parseInt(qid), answer);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
 		Util.convertToJSON(ret, response);
 	}
 
