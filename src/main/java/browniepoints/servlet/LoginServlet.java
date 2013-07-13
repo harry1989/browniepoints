@@ -89,6 +89,9 @@ public class LoginServlet extends HttpServlet {
 		String email = request.getParameter("openid.ax.value.email");
 		String identity = request.getParameter("openid.identity");
 
+		System.out.println(email);
+		System.out.println(identity);
+		
 		boolean userLoggedIn = !Util.isNullOrEmpty(email)
 				&& !Util.isNullOrEmpty(identity);
 
@@ -105,6 +108,8 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("name", email.substring(0, email.indexOf('@')));
 			getServletContext().getRequestDispatcher("/profile.jsp").forward(
 					request, response);
+			System.out.println("new user");
+			return;
 		}
 
 		List<CompositeQuestion> questions = userLoggedIn ? QuestionHelper
