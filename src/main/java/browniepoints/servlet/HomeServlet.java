@@ -14,6 +14,7 @@ import main.java.browniepoints.model.CompositeQuestion;
 import main.java.browniepoints.model.helper.AttemptHelper;
 import main.java.browniepoints.model.helper.CouponHelper;
 import main.java.browniepoints.model.helper.QuestionHelper;
+import main.java.browniepoints.model.helper.RestaurantHelper;
 import main.java.browniepoints.model.helper.VoucherHelper;
 import main.java.browniepoints.util.Util;
 
@@ -22,32 +23,35 @@ import main.java.browniepoints.util.Util;
  */
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public HomeServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public HomeServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
 		super.init(config);
-		
+
 		AttemptHelper.getInstance();
 		QuestionHelper.getInstance();
 		CouponHelper.getInstance();
 		VoucherHelper.getInstance();
+		RestaurantHelper.getInstance();
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<CompositeQuestion> questions =
-				QuestionHelper.getInstance().getRandomQuestions();
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		List<CompositeQuestion> questions = QuestionHelper.getInstance()
+				.getRandomQuestions();
 		if (null == questions || questions.size() == 0)
 			return;
 
@@ -69,9 +73,11 @@ public class HomeServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 

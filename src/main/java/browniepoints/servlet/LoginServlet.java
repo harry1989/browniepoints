@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import main.java.browniepoints.model.CompositeQuestion;
+import main.java.browniepoints.model.User;
 import main.java.browniepoints.model.helper.AttemptHelper;
 import main.java.browniepoints.model.helper.CouponHelper;
 import main.java.browniepoints.model.helper.QuestionHelper;
@@ -69,7 +70,7 @@ public class LoginServlet extends HttpServlet {
 		String op = request.getParameter("op");
 
 		if (!Util.isNullOrEmpty(op)) {
-			Endpoint endpoint = manager.lookupEndpoint("Yahoo");
+			Endpoint endpoint = manager.lookupEndpoint(op);
 			Association association = manager.lookupAssociation(endpoint);
 			request.getSession().setAttribute(ATTR_MAC,
 					association.getRawMacKey());
@@ -85,10 +86,25 @@ public class LoginServlet extends HttpServlet {
 		Authentication authentication = manager.getAuthentication(request,
 				association.getRawMacKey());
 		// System.out.println(authentication);
-		request.setAttribute("identity", authentication.getIdentity());
+		String email = authentication.getEmail();
 
-		boolean userLoggedIn = !Util.isNullOrEmpty(authentication.getEmail())
+		boolean userLoggedIn = !Util.isNullOrEmpty(email)
 				&& !Util.isNullOrEmpty(authentication.getIdentity());
+
+		if (userLoggedIn && UserHelper.getInstance().getUser(email) == null) {
+			// new user sign up. Take him to profile page after inserting a row
+			// in the user table.
+			UserHelper.getInstance().insert(
+					new User(email, email.substring(0, email.indexOf('@')), 0,
+							""));
+
+			request.setAttribute("uid", UserHelper.getInstance().getUser(email)
+					.getUid());
+			request.setAttribute("email", email);
+			request.setAttribute("name", email.substring(0, email.indexOf('@')));
+			getServletContext().getRequestDispatcher("/profile.jsp").forward(
+					request, response);
+		}
 
 		List<CompositeQuestion> questions = userLoggedIn ? QuestionHelper
 				.getInstance().getQuestionsForUser(this.uid) : QuestionHelper

@@ -26,11 +26,11 @@ public class QuestionHelper implements SQLConverter {
 	private static final int VOUCHER_LEN = 10;
 
 	private static final String INSERT_SQL = "insert into public.\"question\" "
-			+ "(uid, title, desc, trivia, url_type, url, option1, option2, option3, "
+			+ "(uid, title, \"desc\", trivia, url_type, url, option1, option2, option3, "
 			+ "option4, answer, rid, cuisine, likes, played, creation_date, approved_by) "
 			+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String SELECT_SQL = "select "
-			+ "uid, title, desc, trivia, url_type, url, option1, option2, option3, "
+			+ "uid, title, \"desc\", trivia, url_type, url, option1, option2, option3, "
 			+ "option4, answer, rid, cuisine, likes, played, creation_date, approved_by"
 			+ "from public.\"question\"";
 	private static final String UPDATE_SQL = "update public.\"question\" "

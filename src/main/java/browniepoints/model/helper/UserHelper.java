@@ -12,7 +12,8 @@ import java.util.Map;
 import main.java.browniepoints.model.User;
 
 public class UserHelper implements SQLConverter {
-	private static final Connection conn = ConnectionProvider.getConnection();
+	private static Connection conn = ConnectionProvider.getConnection();
+	private static final UserHelper instance = new UserHelper();
 	
 	private static final String INSERT_SQL = "insert into public.\"user\" "
 			+ "(email, name, points, phone) values (?, ?, ?, ?)";
@@ -24,11 +25,19 @@ public class UserHelper implements SQLConverter {
 	Map<Integer, User> userByUID = new HashMap<Integer, User>();
 	Map<String, User> userByEmail = new HashMap<String, User>();
 	
-	public UserHelper() {
+	private  UserHelper() {
 		init();
 	}
 	
+	public static UserHelper getInstance() {
+		return instance;
+	}
+	
 	private void init() {
+		if (null == conn) {
+			conn = ConnectionProvider.getConnection();
+		}
+		
 		List<User> users = select();
 		
 		userByEmail.clear();

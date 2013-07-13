@@ -61,7 +61,7 @@ public class AddQuestionServlet extends HttpServlet {
 									.getRid(), getString(request, "cuisine"),
 							0, // likes
 							0, // played
-							System.currentTimeMillis(), null));
+							System.currentTimeMillis(), -1));
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

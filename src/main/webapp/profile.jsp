@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -9,7 +9,11 @@
     <link rel="stylesheet" href="css/app.css">
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic|Open+Sans:400italic,400|Tangerine:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="foundation_icons_all/foundation_icons_social/stylesheets/social_foundicons.css" />
-    <script src="js/vendor/custom.modernizr.js"></script>    
+    <script src="js/vendor/custom.modernizr.js"></script>
+    <script>
+    	<%= request.getAttribute("uid") %>
+    	<%= request.getAttribute("email") %>
+    </script>  
   </head>
   <body>
     <!-- Header and Nav -->

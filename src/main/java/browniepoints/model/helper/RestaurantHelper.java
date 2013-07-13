@@ -60,8 +60,8 @@ public class RestaurantHelper implements SQLConverter {
 	
 		try {
 			while (rs.next()) {
-				Integer rid = rs.getInt("uid");				
-				String name = rs.getString("email");
+				Integer rid = rs.getInt("rid");				
+				String name = rs.getString("name");
 				Double latitude = rs.getDouble("latitude");
 				Double longitude = rs.getDouble("longitude");
 				String place = rs.getString("place");
