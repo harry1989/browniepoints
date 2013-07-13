@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import main.java.browniepoints.model.Attempt;
 import main.java.browniepoints.model.CompositeQuestion;
@@ -22,6 +23,7 @@ public class QuestionHelper implements SQLConverter {
 
 	private static final QuestionHelper instance = new QuestionHelper();
 	private static Connection conn = null;
+	private static final int VOUCHER_LEN = 10;
 
 	private static final String INSERT_SQL = "insert into public.\"question\" "
 			+ "(uid, title, desc, trivia, url_type, url, option1, option2, option3, "
@@ -295,7 +297,7 @@ public class QuestionHelper implements SQLConverter {
 		insert(q);
 	}
 
-	public CompositeQuestion evaluateAnswer(Integer uid, Integer qid,
+	public CompositeQuestion evaluateAnswer(final Integer uid, Integer qid,
 			String userAnswer) throws Exception {
 		CompositeQuestion ret = questionByQID.get(qid);
 
@@ -310,9 +312,20 @@ public class QuestionHelper implements SQLConverter {
 				throw new Exception("Could not retrieve any coupon for qid: "
 						+ qid);
 			}
-			Integer cid = c.getCid();
-			String vCode = VoucherHelper.getInstance().insert(cid, uid);
-			ret.setVoucher_code(vCode);
+			final Integer cid = c.getCid();
+
+			String vCode = UUID.randomUUID().toString().toUpperCase()
+					.replace("-", "");
+			int length = vCode.length() > VOUCHER_LEN ? VOUCHER_LEN : vCode
+					.length();
+			final String code = vCode.substring(0, length);
+			ret.setVoucher_code(code);
+
+			new Thread(new Runnable() {
+				public void run() {
+					VoucherHelper.getInstance().insert(cid, uid, code);
+				}
+			}).start();
 		} else {
 			ret.setAnswer_status("N");
 		}

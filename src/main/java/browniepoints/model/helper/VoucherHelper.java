@@ -15,8 +15,6 @@ import main.java.browniepoints.util.Util;
 
 public class VoucherHelper implements SQLConverter {
 	private static final VoucherHelper instance = new VoucherHelper();
-	private static final int VOUCHER_LEN = 10;
-
 	private static final Connection conn = ConnectionProvider.getConnection();
 
 	private static final String INSERT_SQL = "insert into public.\"voucher\" "
@@ -80,14 +78,10 @@ public class VoucherHelper implements SQLConverter {
 		}
 	}
 
-	public String insert(Integer cid, Integer uid) {
-		String code = UUID.randomUUID().toString().toUpperCase();
-		int length = code.length() > VOUCHER_LEN ? VOUCHER_LEN : code.length();
-		code = code.substring(0, length);
+	public void insert(Integer cid, Integer uid, String code) {
 		Voucher v = new Voucher(cid, uid, code, System.currentTimeMillis(),
 				"NEW");
 		insert(v);
-		return code;
 	}
 
 	public void insert(Voucher voucher) {
