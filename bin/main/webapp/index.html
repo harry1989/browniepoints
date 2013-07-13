@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Welcome to Appet-It!</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic|Open+Sans:400italic,400|Tangerine:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="foundation_icons_all/foundation_icons_social/stylesheets/social_foundicons.css" />
+    <script src="js/vendor/custom.modernizr.js"></script>    
+  </head>
+  <body>
+    <!-- Header and Nav -->
+    <div class="row">&nbsp;</div>
+    <div class="row">
+      <div class="large-4 columns">
+        <img src="img/logo.png" alt="Logo" />
+      </div>
+      <div class="large-2 columns">
+        <form class="custom">
+        <select id="cuisineDropdown" class="medium">
+            <option value="All" selected>Any Cuisine</option>
+            <option value="Chinese">Chinese</option>
+            <option value="Continental">Continental</option>
+            <option value="Indian">Indian</option>
+            <option value="Italian">Italian</option>              
+        </select>
+        </form>
+      </div>
+      <div class="large-2 columns"> 
+        <form class="custom">
+        <select id="cuisineDropdown" class="medium">
+            <option selected>Within 50 kms</option>
+            <option>Within 5 kms</option>
+            <option>Within 15 kms</option>
+            <option>Within 35 kms</option>              
+        </select>
+        </form>
+      </div>
+      <div class="large-4 columns y-topright">
+        <ul class="inline-list right">
+          <li><a href="#" class="y-geo">HYDERABAD</a></li>
+          <li data-reveal-id="addQuestion"><a href="#" class="y-cap">ADD QUESTION</a></li>
+          <li data-reveal-id="signIn"><a href="profile.html" class="y-cap">SIGN IN</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- spaaaaace -->    
+    <div class="row">&nbsp;</div>
+    <div class="row">&nbsp;</div>
+    <div class="row">&nbsp;</div>
+    
+    <!-- Main 3 questions -->
+    <div class="row">
+      <div class="large-4 columns" data-reveal-id="question1">
+        <img alt="pic1" src="http://placehold.it/400x400&text=Dish1" />
+        <div class="panel">
+          <h6>Guess the dish!</h6>
+          <p class="subheader"><span class="y-hint">Win a 25% coupon!</span></p>
+        </div>
+      </div>
+      <div class="large-4 columns" data-reveal-id="question1">
+        <img alt="pic2" src="http://placehold.it/400x400&text=Dish2" />
+        <div class="panel">
+          <h6>Guess the dish!</h6>
+          <p class="subheader"><span class="y-hint">Win 5 points!</span></p>
+        </div>
+      </div>
+      <div class="large-4 columns" data-reveal-id="question1">
+        <img alt="pic3" src="http://placehold.it/400x400&text=Place1" />
+        <div class="panel">
+          <h6>Guess the place!</h6>
+          <p class="subheader"><span class="y-hint">Win 100 points!</span></p>
+        </div>
+      </div>
+    </div>
+    <!-- Shuffle -->
+    <div class="row">&nbsp;</div>
+    <div class="row text-center">
+      <a href="#." title="Shuffle this question set" class="button small success y-shuffle">SHUFFLE</a>    
+    </div>
+    
+    <!-- Footer -->
+  
+    <footer class="row">
+      <div class="large-12 columns">
+        <hr />
+        <div class="row">
+          <div class="large-3 columns">
+            <p class="y-shuffle">&copy; The Nallagandla Debuggers</p>
+          </div>
+          <div class="large-9 columns">
+            <ul class="inline-list right">
+              <li>
+                <div class="row">
+                  <a title="Like on Facebook"target="_blank" 
+                    href="http://www.facebook.com/sharer/sharer.php?u=http://bonappetit.com" 
+                    class="foundicon-facebook y-social">&nbsp;&nbsp;&nbsp;</a>
+                  <a title="+1 on Google+"target="_blank" 
+                    href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://bonappetit.com" 
+                    class="foundicon-google-plus y-social">&nbsp;&nbsp;&nbsp;</a>                  
+                </div>
+              </li>
+              <li data-reveal-id="howItWorks"><a href="#." class="y-cap">HOW IT WORKS</a></li>
+              <li><a href="#" class="y-cap">ABOUT</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+    
+    <!-- Reveal dialogs -->
+    <div>
+      <!-- Question 1 -->
+      <div id="question1" class="reveal-modal large">
+        <div class="row">
+          <h3>Guess this dish:</h3>
+        </div>
+        <div class="large-6 columns">
+          <img alt="pic3" src="http://placehold.it/400x400&text=Dish1" />
+        </div>
+        <div class="large-6 columns">
+          <div class="row">
+            <div class="panel">
+              <div class="y-hint">Made mainly out of dharosh, this dish is widely famous at Nallagandla.</div>
+              <br/><br/>
+              <form class="custom">
+                <label for="radio1">
+                <input name="radio1" type="radio" id="radio1" checked style="display:none;">
+                <span class="custom radio"></span> &nbsp;Okra Masala
+                </label>
+                <br/>
+                <label for="radio1">
+                <input name="radio1" type="radio" id="radio2" style="display:none;">
+                <span class="custom radio"></span> &nbsp;Dharosh Roll
+                </label>
+                <br/>
+                <label for="radio1">          
+                <input name="radio1" type="radio" id="radio3" style="display:none;">
+                <span class="custom radio"></span> &nbsp;Dharosh Bhaja
+                </label>
+                <br/>
+                <label for="radio1">          
+                <input name="radio1" type="radio" id="radio4" style="display:none;">
+                <span class="custom radio"></span> &nbsp;Okra Choda
+                </label>
+              </form>
+            </div>
+          </div>
+          <div class="row">
+            <div class="panel">Win a 25% discount coupon if you get this right!</div>
+          </div>
+          <div class="row">&nbsp;</div>
+          <div class="row">&nbsp;</div>
+          
+          <div class="row">
+              <ul class="inline-list right">
+                <li>
+                  <div class="row">
+                    <a title="Like on Facebook"target="_blank" 
+                      href="http://www.facebook.com/sharer/sharer.php?u=http://bonappetit.com" 
+                      class="foundicon-facebook y-social">&nbsp;&nbsp;&nbsp;</a>
+                    <a title="+1 on Google+"target="_blank" 
+                      href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://bonappetit.com" 
+                      class="foundicon-google-plus y-social">&nbsp;&nbsp;&nbsp;</a>                  
+                  </div>
+                </li>              
+                <li data-reveal-id="answer1"><a href="#." class="button success small">SUBMIT!</a></li>
+              </ul>
+          </div>
+        </div>
+        <a class="close-reveal-modal">&#215;</a>
+      </div>
+    </div>
+    
+    <!-- Answer 1 -->
+    <div id="answer1" class="reveal-modal medium">
+      <div class="row">
+        <div class="large-6 columns">
+          <img alt="pic3" src="http://placehold.it/400x400&text=Dish1" />
+        </div> 
+        <div class="large-6 columns">
+          <div class="panel">
+            Correct Answer: Okra Masala! <br/>
+            You win a 25% discount coupon at <a href="#.">Avasa Hotels</a>! <br/>
+            Voucher code: <b>G3462HYT23</b><br/>
+            A copy of this has been emailed to you.
+          </div>
+          <div class="panel y-hint">
+            <b>Trivia</b>: <a href="#.">Okra Masala</a> was prepared when I had some idea of what to type here.
+          </div>
+              <ul class="inline-list right">
+                <li>
+                  <div class="row">
+                    <a title="Like on Facebook"target="_blank" 
+                      href="http://www.facebook.com/sharer/sharer.php?u=http://bonappetit.com" 
+                      class="foundicon-facebook y-social">&nbsp;&nbsp;&nbsp;</a>
+                    <a title="+1 on Google+"target="_blank" 
+                      href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://bonappetit.com" 
+                      class="foundicon-google-plus y-social">&nbsp;&nbsp;&nbsp;</a>                  
+                  </div>
+                </li>               
+                <li><a href="#." class="button alert small">UNCLAIM</a></li>
+                <li><a href="#."class="button small">PRINT</a></li>          
+              </ul>  
+        </div> 
+      </div>
+      <a class="close-reveal-modal">&#215;</a>
+    </div>
+    
+    <!-- How It Works -->
+    <div id="howItWorks" class="reveal-modal small">
+        <ul data-orbit>
+          <li>
+            <img alt="step1" src="img/food/step1r.jpg" />
+            <div class="orbit-caption">Guess the main ingredient in the dish you see</div>
+          </li>
+          <li>
+            <img alt="step1" src="img/food/step2r.jpg" />
+            <div class="orbit-caption">Or the name of the dish itself</div>
+          </li>
+          <li>
+            <img alt="step1" src="img/food/step3r.jpg" />
+            <div class="orbit-caption">Or the name of the restaurant shown</div>
+          </li>
+          <li>
+            <img alt="step2" src="img/food/step4r.jpg" />
+            <div class="orbit-caption">And win great offers! Discover new cuisines, and explore new restaurants!</div>
+          </li>
+        </ul>      
+    </div>
+    
+    <!-- Sign In -->
+    <div id="signIn" class="reveal-modal tiny">
+      <ul class="pricing-table">
+        <li class="price y-cap">CHOOSE A SERVICE</li>
+        <li class="bullet-item"><a href="#."><img alt="Yahoo" src="img/login_yahoo.png"></a></li>
+        <li class="bullet-item"><a href="#."><img alt="Google" src="img/login_google.png"></a></li>
+        <li class="bullet-item"><a href="#."><img alt="OpenID "src="img/login_openid.png"></a></li>
+      </ul>
+    </div>
+    
+    <!-- Add Question -->
+    <div id="addQuestion"class="reveal-modal large">
+      <h6>ENTER QUESTION DETAILS:</h6>
+      <hr/>
+      <div class="row">&nbsp;</div>
+      <form class="custom">
+        <div class="row">
+          <div class="large-2 columns text-right">
+            <label class="inline">FULL QUESTION</label>
+          </div>
+          <div class="large-10 columns">
+            <textarea placeholder="Enter the description of your question here"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-2 columns text-right">
+            <label class="inline">TYPE</label>
+          </div>
+          <div class="large-4 columns">
+            <select id="customDropdown1" class="large-6 columns">
+                <option selected="selected">Guess the dish</option>
+                <option>Guess the ingredients</option>
+                <option>Guess the place</option>
+            </select>
+          </div>
+          <div class="large-2 columns text-right">
+            <label class="inline">OPTION A</label>
+          </div>
+          <div class="large-4 columns">
+            <input type="text" placeholder="">
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-2 columns text-right">
+            <label class="inline">IMAGE</label>
+          </div>
+          <div class="large-4 columns">
+            <div class="row collapse">
+              <div class="large-6 columns">
+                <input type="text" disabled placeholder="Upload Image">  
+              </div> 
+              <div class="large-6 columns">
+                <a href="#" class="button postfix">CHOOSE...</a>  
+              </div> 
+            </div>            
+          </div>
+          <div class="large-2 columns text-right">
+            <label class="inline">OPTION B</label>
+          </div>
+          <div class="large-4 columns">
+            <input type="text" placeholder="">
+          </div>
+        </div>     
+        <div class="row">
+          <div class="large-2 columns text-right">
+            <label class="inline">HOTEL NAME</label>
+          </div>
+          <div class="large-4 columns">
+            <input type="text" placeholder="Start typing to autocomplete...">
+          </div>
+          <div class="large-2 columns text-right">
+            <label class="inline">OPTION C</label>
+          </div>
+          <div class="large-4 columns">
+            <input type="text" placeholder="">
+          </div>
+        </div> 
+        <div class="row">
+          <div class="large-2 columns text-right">
+            <label class="inline">CORRECT ANSWER</label>
+          </div>
+          <div class="large-4 columns">
+            <select id="correctAnswer" class="large-6 columns">
+                <option selected="selected">Option A</option>
+                <option>Option B</option>
+                <option>Option C</option>
+                <option>Option D</option>
+            </select>
+          </div>
+          <div class="large-2 columns text-right">
+            <label class="inline">OPTION D</label>
+          </div>
+          <div class="large-4 columns">
+            <input type="text" placeholder="">
+          </div>
+        </div>  
+        <hr/>
+        <div class="row">
+          <span class="y-cap">All fields are mandatory. Questions will be approved by moderators before being added.</span>
+          <ul class="inline-list right">
+            <li><a href="#." class="button success small">SUBMIT</a></li>
+          </ul>
+          <a class="close-reveal-modal">&#215;</a>
+        </div>                                                                                                                   
+      </form>
+    </div>
+ 
+    
+    <script>
+      document.write('<script src=js/vendor/' +
+      ('__proto__' in {} ? 'zepto' : 'jquery') +
+      '.js><\/script>')
+    </script>
+    <script src="js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+    <script src="js/home.js"></script>
+  </body>
+</html>

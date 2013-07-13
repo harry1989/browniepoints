@@ -1,0 +1,38 @@
+﻿body, h2, h3, h4, h5, h6 {
+    font-family: 'Source Sans Pro', sans-serif !important;
+}
+
+.y-hint {
+    font-style:italic;    
+}
+
+.y-logo {
+    font-family: 'Source Sans Pro', sans-serif !important;;
+    font-size: 14px;
+    color: gray;
+}
+
+.y-shuffle {
+  font-size: 14px;
+}
+
+.y-cap, .y-geo, .y-cc {
+  font-size: 14px !important; 
+}
+
+.y-cap:hover {
+  color: #0A1F33;
+}
+
+.y-full-width {
+  width: 100%;  
+}
+
+.y-my-points {
+  font-weight: bold;
+}
+
+.y-social {
+  font-size: 18px;
+  
+}
