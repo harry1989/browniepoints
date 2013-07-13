@@ -29,26 +29,6 @@ $.YQL = function(query, callback) {
 
 function loadQuestions() {
 
-	var questions = [ {
-		qid : 1,
-		url : 'http://placehold.it/400x400&text=question1',
-		title : 'Guess the hotel!',
-		coupon_title : 'Win a 50% coupon!',
-		desc : 'This is a desc 1'
-	}, {
-		qid : 2,
-		url : 'http://placehold.it/400x400&text=question2',
-		title : 'Guess the hotel!',
-		coupon_title : 'Win a 50% coupon!',
-		desc : 'This is a desc 2'
-	}, {
-		qid : 3,
-		url : 'http://placehold.it/400x400&text=question3',
-		title : 'Guess the dish!',
-		coupon_title : 'Win a 50% coupon!',
-		desc : 'This is a desc 3'
-	} ];
-
 	// Ensure we have some questions
 	if (!questions) {
 		alert("OOPS: Could not find questions");
@@ -61,6 +41,7 @@ function loadQuestions() {
 	for ( var i = 0; i < questions.length; i++) {
 		html += template(questions[i]);
 	}
+	console.log(html);
 	$('#home-questions').html(html);
 
 	source = $('#full-question-template').html();
