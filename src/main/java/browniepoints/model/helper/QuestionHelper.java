@@ -1,5 +1,6 @@
 package main.java.browniepoints.model.helper;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -294,11 +295,22 @@ public class QuestionHelper implements SQLConverter {
 		return false;
 	}
 	
-	public static void main(String[] args) {
-		QuestionHelper obj = QuestionHelper.getInstance();
-		List<CompositeQuestion> lst = obj.getRandomQuestions();
-		for (CompositeQuestion qn : lst) {
-			System.out.println(qn);
+	public static void main(String[] args) throws IOException {
+		List<CompositeQuestion> questions = QuestionHelper.getInstance()
+				.getRandomQuestions();
+		if (null == questions || questions.size() == 0)
+			return;
+
+		List<CompositeQuestion> ret = new ArrayList<CompositeQuestion>();
+		try {
+			for (CompositeQuestion q : questions) {
+				ret.add(Util.toNonRevealMode(q));
+			}
+
+			System.out.println(Util.convertToJSON(ret));
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
