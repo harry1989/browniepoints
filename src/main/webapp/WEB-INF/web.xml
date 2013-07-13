@@ -22,14 +22,24 @@
 		<description></description>
 		<servlet-class>main.java.browniepoints.servlet.AnswerServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>HomeServlet</servlet-name>
+		<display-name>HomeServlet</display-name>
+		<description></description>
+		<servlet-class>main.java.browniepoints.servlet.HomeServlet</servlet-class>
+	</servlet>	
 	<servlet-mapping>
 		<servlet-name>QuestionServlet</servlet-name>
 		<url-pattern>/q</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>LoginServlet</servlet-name>
+		<servlet-name>HomeServlet</servlet-name>
 		<url-pattern>/main</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>	
 	<servlet-mapping>
 		<servlet-name>AnswerServlet</servlet-name>
 		<url-pattern>/a</url-pattern>

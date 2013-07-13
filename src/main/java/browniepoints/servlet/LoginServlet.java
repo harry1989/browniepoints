@@ -57,7 +57,7 @@ public class LoginServlet extends HttpServlet {
 		super.init(config);
 		manager = new OpenIdManager();
 		manager.setRealm("http://glacial-shore-4255.herokuapp.com/");
-		manager.setReturnTo("http://glacial-shore-4255.herokuapp.com/main");
+		manager.setReturnTo("http://glacial-shore-4255.herokuapp.com/login");
 	}
 
 	/**
