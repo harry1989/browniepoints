@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.java.browniepoints.model.CompositeQuestion;
@@ -50,9 +51,10 @@ public class Util {
 		Gson gson = new Gson();
 		String json = gson.toJson(obj);
 		return json;
-	}	
-	
-	public static void convertToJSON(Object obj, HttpServletResponse response) throws IOException {
+	}
+
+	public static void convertToJSON(Object obj, HttpServletResponse response)
+			throws IOException {
 		if (obj == null || response == null)
 			return;
 
@@ -66,20 +68,58 @@ public class Util {
 
 		response.getWriter().write(json);
 	}
-	
-	public static CompositeQuestion toNonRevealMode(CompositeQuestion q) throws CloneNotSupportedException {
+
+	public static CompositeQuestion toNonRevealMode(CompositeQuestion q)
+			throws CloneNotSupportedException {
 		CompositeQuestion nq = q.copyOf();
-		
+
 		nq.getQ().setTrivia("");
 		nq.getQ().setAnswer("");
 		nq.getQ().setRid(null);
 		nq.getQ().setApproved_by(null);
 		nq.getQ().setCreation_date(null);
-		
+
 		return nq;
 	}
-	
+
 	public static boolean isNullOrEmpty(String str) {
 		return (str == null || str.trim().equals(""));
 	}
+
+	private static String getRequestParameter(HttpServletRequest request,
+			String attr) throws Exception {
+		if (null == request) {
+			throw new Exception("Null request object.");
+		}
+		if (isNullOrEmpty(attr)) {
+			throw new Exception("Attribute not specified.");
+		}
+		String v = request.getParameter(attr);
+		if (isNullOrEmpty(v)) {
+			throw new Exception("Attribute " + attr
+					+ " not found in request object.");
+		}
+
+		return v;
+	}
+
+	public static Integer getInt(HttpServletRequest request, String attr)
+			throws NumberFormatException, Exception {
+		return Integer.parseInt(getRequestParameter(request, attr));
+	}
+	
+	public static String getString(HttpServletRequest request, String attr)
+			throws NumberFormatException, Exception {
+		return getRequestParameter(request, attr);
+	}
+	
+	public static Long getLong(HttpServletRequest request, String attr)
+			throws NumberFormatException, Exception {
+		return Long.parseLong(getRequestParameter(request, attr));
+	}
+
+	public static Double getDouble(HttpServletRequest request, String attr)
+			throws NumberFormatException, Exception {
+		return Double.parseDouble(getRequestParameter(request, attr));
+	}	
 }

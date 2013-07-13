@@ -376,10 +376,11 @@ public class QuestionHelper implements SQLConverter {
 		// "Barbeque-Nation"));
 
 		// QuestionHelper.getInstance().likeQuestion(2);
-		List<CompositeQuestion> lst = QuestionHelper.getInstance()
-				.getQuestionsForUser(1);
-		for (CompositeQuestion q : lst) {
-			System.out.println(q);
-		}
+//		List<CompositeQuestion> lst = QuestionHelper.getInstance()
+//				.getQuestionsForUser(1);
+//		for (CompositeQuestion q : lst) {
+//			System.out.println(q);
+//		}
+//		Question nq = new Question(2, 
 	}
 }

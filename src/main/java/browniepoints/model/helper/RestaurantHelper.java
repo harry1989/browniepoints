@@ -13,7 +13,8 @@ import main.java.browniepoints.model.Restaurant;
 
 public class RestaurantHelper implements SQLConverter {
 
-	private static final Connection conn = ConnectionProvider.getConnection();
+	private static Connection conn = ConnectionProvider.getConnection();
+	private static final RestaurantHelper instance = new RestaurantHelper();
 	
 	private static final String INSERT_SQL = "insert into public.\"restaurant\" "
 			+ "(name, latitude, longitude, place, phone, cuisine, owner_uid) "
@@ -26,18 +27,29 @@ public class RestaurantHelper implements SQLConverter {
 			+ "phone = ?, cuisine = ?, owner_uid = ? where rid = ?";
 	
 	Map<Integer, Restaurant> bistroByRID = new HashMap<Integer, Restaurant>();
+	Map<String, Restaurant> bistroByName = new HashMap<String, Restaurant>();
 	
-	public RestaurantHelper() {
+	private RestaurantHelper() {
 		init();
 	}
 	
+	public static RestaurantHelper getInstance() {
+		return instance;
+	}
+	
 	private void init() {
+		if (null == conn) {
+			conn = ConnectionProvider.getConnection();
+		}
+		
 		List<Restaurant> bistros = select();
 		
 		bistroByRID.clear();
+		bistroByName.clear();
 		
 		for (Integer i = 0; i < bistros.size(); ++i) {
-			bistroByRID.put(bistros.get(i).getRid(), bistros.get(i));			
+			bistroByRID.put(bistros.get(i).getRid(), bistros.get(i));
+			bistroByName.put(bistros.get(i).getName(), bistros.get(i));
 		}
 	}
 	
@@ -109,4 +121,7 @@ public class RestaurantHelper implements SQLConverter {
 		return bistroByRID.get(id);
 	}
 
+	public Restaurant getRestaurantByName(String name) {
+		return bistroByName.get(name);
+	}	
 }
