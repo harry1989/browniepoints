@@ -21,7 +21,7 @@ public class QuestionHelper implements SQLConverter {
 
 	private static final QuestionHelper instance = new QuestionHelper();
 	private static Connection conn = null;
-	
+
 	private static final String INSERT_SQL = "insert into public.\"question\" "
 			+ "(uid, title, desc, trivia, url_type, url, option1, option2, option3, "
 			+ "option4, answer, rid, cuisine, likes, played, creation_date, approved_by) "
@@ -35,53 +35,50 @@ public class QuestionHelper implements SQLConverter {
 			+ "url_type = ?, url = ?, option1 = ?, option2 = ?, option3 = ?, "
 			+ "option4 = ?, answer = ?, rid = ?, cuisine = ?, likes = ?,"
 			+ "played = ?, creation_date = ?, approved_by = ? where qid = ?";
-	
-	Map<Integer, List<CompositeQuestion>> questionByUID =
-			new HashMap<Integer, List<CompositeQuestion>>();
-	Map<String, List<CompositeQuestion>> questionByCuisine =
-			new HashMap<String, List<CompositeQuestion>>();
-	
+
+	Map<Integer, List<CompositeQuestion>> questionByUID = new HashMap<Integer, List<CompositeQuestion>>();
+	Map<String, List<CompositeQuestion>> questionByCuisine = new HashMap<String, List<CompositeQuestion>>();
+
 	List<CompositeQuestion> offerQuestions = new ArrayList<CompositeQuestion>();
 	List<CompositeQuestion> noOfferQuestions = new ArrayList<CompositeQuestion>();
-	
+
 	List<CompositeQuestion> questions = new ArrayList<CompositeQuestion>();
-	Map<Integer, Question> questionByQID = new HashMap<Integer, Question>();
-	
+	Map<Integer, CompositeQuestion> questionByQID = new HashMap<Integer, CompositeQuestion>();
+
 	private QuestionHelper() {
 		init();
 	}
-	
+
 	public static QuestionHelper getInstance() {
 		return instance;
 	}
-	
+
 	private void init() {
 		if (null == conn) {
 			conn = ConnectionProvider.getConnection();
 		}
-		
+
 		List<CompositeQuestion> questions = selectQnsByOffer();
-		if (null == questions) return;
-		
+		if (null == questions)
+			return;
+
 		questionByUID.clear();
 		questionByCuisine.clear();
-		
+
 		CompositeQuestion curr = null;
 		for (Integer i = 0; i < questions.size(); ++i) {
 			curr = questions.get(i);
-			
+
 			this.questions.add(curr);
-			questionByQID.put(curr.getQ().getQid(), curr.getQ());
-			Util.addToMap(
-					questionByUID, curr.getQ().getUid(), curr);
-			
+			questionByQID.put(curr.getQ().getQid(), curr);
+			Util.addToMap(questionByUID, curr.getQ().getUid(), curr);
+
 			String cuisine = curr.getQ().getCuisine();
 			if (cuisine == null || cuisine.trim() == "") {
 				cuisine = curr.getR().getCuisine();
 			}
-			Util.addToMap(
-					questionByCuisine, cuisine, curr);
-			
+			Util.addToMap(questionByCuisine, cuisine, curr);
+
 			if (curr.getC().hasCid()) {
 				offerQuestions.add(curr);
 			} else {
@@ -89,12 +86,13 @@ public class QuestionHelper implements SQLConverter {
 			}
 		}
 	}
-	
+
 	public List<?> convertRSToList(ResultSet rs) {
 		List<Question> questionList = new ArrayList<Question>();
-		
-		if (rs == null) return questionList;
-	
+
+		if (rs == null)
+			return questionList;
+
 		try {
 			while (rs.next()) {
 				Integer qid = rs.getInt("qid");
@@ -118,20 +116,21 @@ public class QuestionHelper implements SQLConverter {
 
 				questionList.add(new Question(qid, uid, title, desc, trivia,
 						urlType, url, option1, option2, option3, option4,
-						answer, rid, cuisine, likes, played, creationDate, approvedBy));
+						answer, rid, cuisine, likes, played, creationDate,
+						approvedBy));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return questionList;
 	}
 
-
 	public void setColumnsForUpdate(Object entity, PreparedStatement stmt) {
-		if (stmt == null || entity == null) return;
-		
+		if (stmt == null || entity == null)
+			return;
+
 		Question question = (Question) entity;
 		try {
 			stmt.setInt(1, question.getUid());
@@ -151,31 +150,32 @@ public class QuestionHelper implements SQLConverter {
 			stmt.setInt(15, question.getPlayed());
 			stmt.setLong(16, question.getCreation_date());
 			stmt.setInt(17, question.getApproved_by());
-			if (question.hasQid()) stmt.setInt(18, question.getQid());
+			if (question.hasQid())
+				stmt.setInt(18, question.getQid());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void insert(Question question) {
 		QueryHelper.ExecuteInsertOrUpdate(conn, INSERT_SQL, question, this);
 		// update cache
 		init();
 	}
-	
+
 	public void update(Question question) {
 		QueryHelper.ExecuteInsertOrUpdate(conn, UPDATE_SQL, question, this);
 		// update cache
 		init();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Question> select() {
-		return (List<Question>) QueryHelper.ExecuteSelect(
-				conn, SELECT_SQL, this);
+		return (List<Question>) QueryHelper.ExecuteSelect(conn, SELECT_SQL,
+				this);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<CompositeQuestion> selectQnsByOffer() {
 		String sql = "select "
@@ -191,20 +191,21 @@ public class QuestionHelper implements SQLConverter {
 				+ "from public.\"question\" as q, public.\"restaurant\" as r, "
 				+ "public.\"coupon\" as c "
 				+ "where q.rid = r.rid and q.qid = c.qid";
-		return (List<CompositeQuestion>) QueryHelper.ExecuteSelect(
-				conn, sql, new SQLConverter() {
-					
-					public void setColumnsForUpdate(Object entity, PreparedStatement stmt) {
+		return (List<CompositeQuestion>) QueryHelper.ExecuteSelect(conn, sql,
+				new SQLConverter() {
+
+					public void setColumnsForUpdate(Object entity,
+							PreparedStatement stmt) {
 						// TODO Auto-generated method stub
-						
+
 					}
-					
+
 					public List<?> convertRSToList(ResultSet rs) {
-						List<CompositeQuestion> questionList =
-								new ArrayList<CompositeQuestion>();
-						
-						if (rs == null) return questionList;
-					
+						List<CompositeQuestion> questionList = new ArrayList<CompositeQuestion>();
+
+						if (rs == null)
+							return questionList;
+
 						try {
 							while (rs.next()) {
 								CompositeQuestion cq = new CompositeQuestion();
@@ -224,23 +225,27 @@ public class QuestionHelper implements SQLConverter {
 								cq.getQ().setCuisine(rs.getString("cuisine"));
 								cq.getQ().setLikes(rs.getInt("likes"));
 								cq.getQ().setPlayed(rs.getInt("played"));
-								cq.getQ().setCreation_date(rs.getLong("creation_date"));
-								cq.getQ().setApproved_by(rs.getInt("approved_by"));
-								
+								cq.getQ().setCreation_date(
+										rs.getLong("creation_date"));
+								cq.getQ().setApproved_by(
+										rs.getInt("approved_by"));
+
 								cq.getR().setRid(rs.getInt("rrid"));
 								cq.getR().setName(rs.getString("name"));
 								cq.getR().setLatitude(rs.getDouble("latitude"));
-								cq.getR().setLongitude(rs.getDouble("longitude"));
+								cq.getR().setLongitude(
+										rs.getDouble("longitude"));
 								cq.getR().setPlace(rs.getString("place"));
 								cq.getR().setPhone(rs.getString("phone"));
 								cq.getR().setCuisine(rs.getString("cuisine"));
 								cq.getR().setOwner_uid(rs.getInt("owner_uid"));
-								
+
 								cq.getC().setCid(rs.getInt("cid"));
 								cq.getC().setDesc(rs.getString("cd"));
 								cq.getC().setDiscount(rs.getInt("discount"));
 								cq.getC().setEnd_date(rs.getLong("end_date"));
-								cq.getC().setStart_date(rs.getLong("start_date"));
+								cq.getC().setStart_date(
+										rs.getLong("start_date"));
 								cq.getC().setPoints(rs.getInt("points"));
 								cq.getC().setQid(rs.getInt("cqid"));
 								cq.getC().setTitle(rs.getString("ct"));
@@ -252,18 +257,18 @@ public class QuestionHelper implements SQLConverter {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						
+
 						return questionList;
 					}
 				});
 	}
-	
+
 	public List<CompositeQuestion> getQuestionsForUser(Integer uid) {
 		List<Attempt> attempts = AttemptHelper.getInstance().getAttempt(uid);
-		Attempt last = (attempts != null && attempts.size() > 0) ?
-				attempts.get(0) : null;
-		if (last == null ||
-			Util.dateDiff(System.currentTimeMillis(), last.getDate()) >= 1) {
+		Attempt last = (attempts != null && attempts.size() > 0) ? attempts
+				.get(0) : null;
+		if (last == null
+				|| Util.dateDiff(System.currentTimeMillis(), last.getDate()) >= 1) {
 			// Return offer questions.
 			return getRandomQuestions(offerQuestions);
 		} else {
@@ -271,46 +276,58 @@ public class QuestionHelper implements SQLConverter {
 			return getRandomQuestions(noOfferQuestions);
 		}
 	}
-	
 
 	private List<CompositeQuestion> getRandomQuestions(
 			List<CompositeQuestion> orig) {
-		List<CompositeQuestion> copy =
-				new LinkedList<CompositeQuestion>(orig);
+		List<CompositeQuestion> copy = new LinkedList<CompositeQuestion>(orig);
 		Collections.shuffle(copy);
 		int size = copy.size() >= 3 ? 3 : copy.size();
 		return copy.subList(0, size);
 	}
-	
+
 	public List<CompositeQuestion> getRandomQuestions() {
 		return getRandomQuestions(this.questions);
 	}
-	
+
 	public void likeQuestion(Question q) {
 		q.setLikes(q.getLikes() + 1);
 		insert(q);
 	}
 
-	public boolean evaluateAnswer(Integer qid) {
-		return false;
-	}
-	
-	public static void main(String[] args) throws IOException {
-		List<CompositeQuestion> questions = QuestionHelper.getInstance()
-				.getRandomQuestions();
-		if (null == questions || questions.size() == 0)
-			return;
+	public CompositeQuestion evaluateAnswer(Integer qid, String userAnswer) {
+		CompositeQuestion ret = questionByQID.get(qid);
 
-		List<CompositeQuestion> ret = new ArrayList<CompositeQuestion>();
-		try {
-			for (CompositeQuestion q : questions) {
-				ret.add(Util.toNonRevealMode(q));
-			}
+		if (ret == null)
+			return null;
 
-			System.out.println(Util.convertToJSON(ret));
-		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (userAnswer != null && userAnswer.equals(ret.getQ().getAnswer())) {
+			ret.setAnswer_status("Y");
+		} else {
+			ret.setAnswer_status("N");
 		}
+
+		return ret;
+	}
+
+	public static void main(String[] args) throws IOException {
+		// List<CompositeQuestion> questions = QuestionHelper.getInstance()
+		// .getRandomQuestions();
+		// if (null == questions || questions.size() == 0)
+		// return;
+		//
+		// List<CompositeQuestion> ret = new ArrayList<CompositeQuestion>();
+		// try {
+		// for (CompositeQuestion q : questions) {
+		// ret.add(Util.toNonRevealMode(q));
+		// }
+		//
+		// System.out.println(Util.convertToJSON(ret));
+		// } catch (CloneNotSupportedException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+
+		System.out.println(QuestionHelper.getInstance().evaluateAnswer(7,
+				"BarbequeNation"));
 	}
 }

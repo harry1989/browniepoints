@@ -78,4 +78,8 @@ public class Util {
 		
 		return nq;
 	}
+	
+	public static boolean isNullOrEmpty(String str) {
+		return (str == null || str.trim().equals(""));
+	}
 }
