@@ -86,10 +86,11 @@ public class LoginServlet extends HttpServlet {
 		Authentication authentication = manager.getAuthentication(request,
 				association.getRawMacKey());
 		// System.out.println(authentication);
-		String email = authentication.getEmail();
+		String email = request.getParameter("openid.ax.value.email");
+		String identity = request.getParameter("openid.identity");
 
 		boolean userLoggedIn = !Util.isNullOrEmpty(email)
-				&& !Util.isNullOrEmpty(authentication.getIdentity());
+				&& !Util.isNullOrEmpty(identity);
 
 		if (userLoggedIn && UserHelper.getInstance().getUser(email) == null) {
 			// new user sign up. Take him to profile page after inserting a row
