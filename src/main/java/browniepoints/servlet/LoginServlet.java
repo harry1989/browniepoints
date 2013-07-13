@@ -1,10 +1,10 @@
 package main.java.browniepoints.servlet;
 
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import main.java.browniepoints.model.CompositeQuestion;
+import main.java.browniepoints.model.helper.AttemptHelper;
+import main.java.browniepoints.model.helper.CouponHelper;
 import main.java.browniepoints.model.helper.QuestionHelper;
+import main.java.browniepoints.model.helper.UserHelper;
+import main.java.browniepoints.model.helper.VoucherHelper;
 import main.java.browniepoints.util.Util;
 
 
@@ -29,6 +33,16 @@ public class LoginServlet extends HttpServlet {
 	public LoginServlet() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		// TODO Auto-generated method stub
+		super.init(config);
+		QuestionHelper.getInstance();
+		CouponHelper.getInstance();
+		VoucherHelper.getInstance();
+		AttemptHelper.getInstance();
 	}
 
 	/**

@@ -1,6 +1,6 @@
 ﻿$(function() {
 	console.log('Loaded...');
-//	setLocation();
+	// setLocation();
 	loadQuestions();
 });
 
@@ -53,4 +53,65 @@ function loadQuestions() {
 	}
 	$('#full-questions').html(html);
 	console.log(html);
+}
+
+function submitAnswer(qid) {
+	console.log('Entering submitAnswer');
+	var uid = 1;
+	var ansid = 1;
+	var anstext = '';
+	
+	for ( var i = 1; i <= 4; i++) {
+		var  el = '#lradio' + i + '_' + qid;
+		if ($(el + ' span').hasClass('checked')) {
+			anstext = $(el).text().trim();
+			break;
+		}
+	}
+	if (anstext) {
+		$.ajax({
+			type : "POST",
+			url : '/a',
+			dataType : 'json',
+			data : 'uid=' + uid + '&qid=' + qid + '&a=' + anstext,
+			success : function(response) {
+				handleAnswer(response);
+			},
+			error : function(xhr, ajaxOptions, thrownError) {
+				alert(xhr.responseText);
+				alert(thrownError);
+			}
+		});
+	}
+}
+
+function handleAnswer(response) {
+	console.log('In handleAnswer...');
+	var source = $('#answer-template').html();
+	var template = Handlebars.compile(source);
+	
+	if(response.answer_status === 'Y') {
+		response.header = '<span class="y-correct">That\'s correct!</span>';
+		response.correct = 1;
+	}
+	else {
+		response.header = '<span class="y-incorrect">Sorry that was incorrect!</span>';
+		response.correct = 0;
+	}
+	
+	var html = template(response);
+	$('#answer').html(html);	
+	$('#answer > div').foundation('reveal', 'open');
+
+}
+
+function shuffleQuestions() {
+	console.log('In shuffleQuestions...');
+	var uid = 1;
+	
+	$.get('/q?uid=' + uid, function(data) {
+		questions = data;
+		loadQuestions();
+	});
+	
 }
