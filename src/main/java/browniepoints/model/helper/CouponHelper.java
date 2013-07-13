@@ -13,31 +13,41 @@ import main.java.browniepoints.model.Coupon;
 
 public class CouponHelper implements SQLConverter {
 
-	private static final Connection conn = ConnectionProvider.getConnection();
+	private static Connection conn = null;
+	private static final CouponHelper instance = new CouponHelper();
 	
 	private static final String INSERT_SQL = "insert into public.\"coupon\" "
 			+ "(qid, title, desc, quota, discount, points, start_date, end_date) "
 			+ "values (?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String SELECT_SQL = "select "
-			+ "cid, qid, title, desc, quota, discount, points, start_date, end_date "
+			+ "cid, qid, title, \"desc\", quota, discount, points, start_date, end_date "
 			+ "from public.\"coupon\"";
 	private static final String UPDATE_SQL = "update public.\"coupon\" "
 			+ "set qid = ?, title = ?, desc = ?, quota = ?, discount = ?, "
 			+ "points = ?, start_date = ?, end_date = ? where cid = ?";
 	
 	Map<Integer, Coupon> couponByCID = new HashMap<Integer, Coupon>();
+	Map<Integer, Coupon> couponByQID = new HashMap<Integer, Coupon>();
 	
-	public CouponHelper() {
+	private CouponHelper() {
 		init();
 	}
 	
+	public static CouponHelper getInstance() {
+		return instance;
+	}
+	
 	private void init() {
+		if (null == conn) {
+			conn = ConnectionProvider.getConnection();
+		}		
 		List<Coupon> coupons = select();
 		
 		couponByCID.clear();
 		
 		for (Integer i = 0; i < coupons.size(); ++i) {
-			couponByCID.put(coupons.get(i).getCid(), coupons.get(i));			
+			couponByCID.put(coupons.get(i).getCid(), coupons.get(i));
+			couponByQID.put(coupons.get(i).getQid(), coupons.get(i));
 		}
 	}
 	
@@ -110,4 +120,8 @@ public class CouponHelper implements SQLConverter {
 	public Coupon getCoupon(Integer id) {
 		return couponByCID.get(id);
 	}
+	
+	public Coupon getCouponByQid(Integer qid) {
+		return couponByQID.get(qid);
+	}	
 }

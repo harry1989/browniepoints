@@ -14,6 +14,7 @@ import java.util.Map;
 
 import main.java.browniepoints.model.Attempt;
 import main.java.browniepoints.model.CompositeQuestion;
+import main.java.browniepoints.model.Coupon;
 import main.java.browniepoints.model.Question;
 import main.java.browniepoints.util.Util;
 
@@ -294,7 +295,8 @@ public class QuestionHelper implements SQLConverter {
 		insert(q);
 	}
 
-	public CompositeQuestion evaluateAnswer(Integer qid, String userAnswer) {
+	public CompositeQuestion evaluateAnswer(Integer uid, Integer qid,
+			String userAnswer) throws Exception {
 		CompositeQuestion ret = questionByQID.get(qid);
 
 		if (ret == null)
@@ -302,14 +304,25 @@ public class QuestionHelper implements SQLConverter {
 
 		if (userAnswer != null && userAnswer.equals(ret.getQ().getAnswer())) {
 			ret.setAnswer_status("Y");
+			// Generate voucher.
+			Coupon c = CouponHelper.getInstance().getCouponByQid(qid);
+			if (c == null) {
+				throw new Exception("Could not retrieve any coupon for qid: "
+						+ qid);
+			}
+			Integer cid = c.getCid();
+			String vCode = VoucherHelper.getInstance().insert(cid, uid);
+			ret.setVoucher_code(vCode);
 		} else {
 			ret.setAnswer_status("N");
 		}
 
+		// Insert into attempts table.
+
 		return ret;
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 		// List<CompositeQuestion> questions = QuestionHelper.getInstance()
 		// .getRandomQuestions();
 		// if (null == questions || questions.size() == 0)
@@ -327,7 +340,7 @@ public class QuestionHelper implements SQLConverter {
 		// e.printStackTrace();
 		// }
 
-		System.out.println(QuestionHelper.getInstance().evaluateAnswer(7,
-				"BarbequeNation"));
+		System.out.println(QuestionHelper.getInstance().evaluateAnswer(1, 7,
+				"Barbeque-Nation"));
 	}
 }

@@ -6,6 +6,15 @@ public class CompositeQuestion implements Cloneable {
 	private Restaurant r = new Restaurant();
 
 	private String answer_status = "N";
+	private String voucher_code = "";
+
+	public String getVoucher_code() {
+		return voucher_code;
+	}
+
+	public void setVoucher_code(String voucher_code) {
+		this.voucher_code = voucher_code;
+	}
 
 	public String getAnswer_status() {
 		return answer_status;
@@ -22,7 +31,8 @@ public class CompositeQuestion implements Cloneable {
 	@Override
 	public String toString() {
 		return "CompositeQuestion [q=" + q + ", c=" + c + ", r=" + r
-				+ ", answer_status=" + answer_status + "]";
+				+ ", answer_status=" + answer_status + ", voucher_code="
+				+ voucher_code + "]";
 	}
 
 	public void setQ(Question q) {
