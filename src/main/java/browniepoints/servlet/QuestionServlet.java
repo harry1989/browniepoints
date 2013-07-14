@@ -37,8 +37,9 @@ public class QuestionServlet extends HttpServlet {
 		Integer uid = UserHelper.getInstance().getLoggedInUid();
 		List<CompositeQuestion> questions = QuestionHelper.getInstance()
 				.getQuestionsForUser(uid);
-		if (null == questions || questions.size() == 0)
-			return;
+		if (null == questions || questions.size() == 0) {
+			questions = QuestionHelper.getInstance().getRandomQuestions();
+		}
 
 		List<CompositeQuestion> ret = new ArrayList<CompositeQuestion>();
 		try {
