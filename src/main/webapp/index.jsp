@@ -138,9 +138,8 @@
     <div id="signIn" class="reveal-modal tiny">
       <ul class="pricing-table">
         <li class="price y-cap">CHOOSE A SERVICE</li>
-        <li class="bullet-item"><a href="#."><img alt="Yahoo" src="img/login_yahoo.png"></a></li>
-        <li class="bullet-item"><a href="#."><img alt="Google" src="img/login_google.png"></a></li>
-        <li class="bullet-item"><a href="#."><img alt="OpenID "src="img/login_openid.png"></a></li>
+        <li class="bullet-item"><a href="/login?op=Yahoo"><img alt="Yahoo" src="img/login_yahoo.png"></a></li>
+        <li class="bullet-item"><a href="/login?op=Google"><img alt="Google" src="img/login_google.png"></a></li>
       </ul>
     </div>
     
