@@ -57,8 +57,8 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		super.init(config);
 		manager = new OpenIdManager();
-		manager.setRealm("http://glacial-shore-4255.herokuapp.com/");
-		manager.setReturnTo("http://glacial-shore-4255.herokuapp.com/login");
+		manager.setRealm("http://boiling-mountain-6229.herokuapp.com/");
+		manager.setReturnTo("http://boiling-mountain-6229.herokuapp.com/login");
 	}
 
 	/**
