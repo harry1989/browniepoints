@@ -25,7 +25,7 @@ $.YQL = function(query, callback) {
 	var encodedQuery = encodeURIComponent(query.toLowerCase());
 	var url = 'http://query.yahooapis.com/v1/public/yql?q=' + encodedQuery
 			+ '&format=json&callback=?';
-	$.getJSON(uplays rl, callback);
+	$.getJSON(url, callback);
 };
 
 function loadQuestions() {
