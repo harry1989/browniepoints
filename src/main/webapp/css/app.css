@@ -45,12 +45,8 @@
 	color: red !important;
 }
 
-.y-likes {
+.y-likes, .y-plays {
   color: #999 !important  ;
   font-size:13px;
 }
 
-.y-plays {
-  color: #999 !important  ;
-  font-size:11px;	
-}

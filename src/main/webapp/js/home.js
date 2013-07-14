@@ -1,6 +1,6 @@
 ﻿$(function() {
 	console.log('Loaded...');
-	// setLocation();
+	setLocation();
 	loadQuestions();
 	setupUser();
 });
@@ -25,7 +25,7 @@ $.YQL = function(query, callback) {
 	var encodedQuery = encodeURIComponent(query.toLowerCase());
 	var url = 'http://query.yahooapis.com/v1/public/yql?q=' + encodedQuery
 			+ '&format=json&callback=?';
-	$.getJSON(url, callback);
+	$.getJSON(uplays rl, callback);
 };
 
 function loadQuestions() {
@@ -76,7 +76,7 @@ function submitAnswer(qid) {
 			dataType : 'json',
 			data : 'uid=' + uid + '&qid=' + qid + '&a=' + anstext,
 			success : function(response) {
-				handleAnswer(response);
+				plays handleAnswer(response);
 			},
 			error : function(xhr, ajaxOptions, thrownError) {
 				alert(xhr.responseText);
