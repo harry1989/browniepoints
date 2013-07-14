@@ -28,7 +28,7 @@
       <div class="large-8 columns">
         <ul class="inline-list right">
           <li><a href="#" class="y-cap">ADD QUESTION</a></li>
-          <li><a href="/yhack" class="y-cap">HOME</a></li>
+          <li><a href="/" class="y-cap">HOME</a></li>
         </ul>
       </div>
     </div>
@@ -79,7 +79,7 @@
                   <label class="inline">MOBILE NUMBER</label>
                 </div>
                 <div class="large-6 columns">
-                  <input type="text" placeholder="Enter 10 digit mobile number">
+                  <input type="text" id='pCell' placeholder="Enter 10 digit mobile number">
                 </div>
                 <div class="large-2 columns">&nbsp;</div>
               </div>  

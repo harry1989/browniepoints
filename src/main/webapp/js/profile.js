@@ -70,4 +70,7 @@ function loadProfile() {
 
 function saveProfile() {
 	console.log('In saveProfile..');
+	$.post('/p', 'name=' + $('#pFullName').val() + '&phone=' + $('#pCell').val(), function() {
+		console.log('Saved!');
+	})
 }
