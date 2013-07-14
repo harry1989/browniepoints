@@ -12,7 +12,9 @@
     <script src="js/vendor/custom.modernizr.js"></script>
     <script>
     	<%= request.getAttribute("uid") %>
-    	<%= request.getAttribute("email") %>
+        var user_email = '<%= session.getAttribute("email") %>';    	
+        var user_info = <%= request.getAttribute("userInfo") %>;
+    	
     </script>  
   </head>
   <body>

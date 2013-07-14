@@ -87,7 +87,10 @@ public class ProfileServlet extends HttpServlet {
 		ret.setRet(m);
 		ret.setUser(UserHelper.getInstance().getUser(uid));
 
-		Util.convertToJSON(ret, response);
+		String userJson = Util.convertToJSON(ret);
+		request.setAttribute("userJson", userJson);
+		getServletContext().getRequestDispatcher("/profile.jsp").forward(request, response);
+		return;
 	}
 
 //	public static void test() throws IOException {
