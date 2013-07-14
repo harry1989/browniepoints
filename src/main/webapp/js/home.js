@@ -76,7 +76,7 @@ function submitAnswer(qid) {
 			dataType : 'json',
 			data : 'uid=' + uid + '&qid=' + qid + '&a=' + anstext,
 			success : function(response) {
-				plays handleAnswer(response);
+				handleAnswer(response);
 			},
 			error : function(xhr, ajaxOptions, thrownError) {
 				alert(xhr.responseText);
