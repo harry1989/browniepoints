@@ -14,7 +14,8 @@
 	<script type="text/javascript" src="js/handlebars.js"></script> 
 	
 	<script>
-		var questions = <%= request.getAttribute("questions") %>
+		var questions = <%= request.getAttribute("questions") %>;
+		var user_email = '<%= request.getAttribute("email") %>';
 	</script>
 	    
   </head>

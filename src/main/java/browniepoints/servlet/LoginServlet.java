@@ -34,6 +34,7 @@ import org.expressme.openid.OpenIdManager;
  */
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String APP_URL = "http://gentle-badlands-2040.herokuapp.com/"; 
 
 	private OpenIdManager manager = null;
 
@@ -41,6 +42,7 @@ public class LoginServlet extends HttpServlet {
 	static final long TWO_HOUR = ONE_HOUR * 2L;
 	static final String ATTR_MAC = "openid_mac";
 	static final String ATTR_ALIAS = "openid_alias";
+	
 
 	private Integer uid = null;
 
@@ -57,8 +59,8 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		super.init(config);
 		manager = new OpenIdManager();
-		manager.setRealm("http://glacial-shore-4255.herokuapp.com/");
-		manager.setReturnTo("http://glacial-shore-4255.herokuapp.com/login");
+		manager.setRealm(APP_URL);
+		manager.setReturnTo(APP_URL + "/login");
 	}
 
 	/**
