@@ -269,7 +269,12 @@
         <img alt="Question Picture" src="{{q.url}}" />
         <div class="panel">
           <h6>{{q.title}}</h6>
-          <p class="subheader"><span class="y-hint">{{c.title}}</span></p>
+          <div class="row">
+          <div class="large-6 columns subheader"><span class="y-hint">{{c.title}}</span></div>  
+          <div class="y-likesplays large-6 columns subheader text-right">
+            <span>&#9654;&nbsp;{{q.likes}}</span>&nbsp;
+            <span>&#10084;&nbsp;{{q.plays}}</span>    
+          </div>
         </div>
       </div>
     </script> 
