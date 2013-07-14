@@ -151,7 +151,7 @@
         <hr />
         <div class="row">
           <div class="large-3 columns">
-            <p class="y-shuffle">&copy; The Nallagandla Debuggers</p>
+            <p class="y-shuffle">&copy; The Quadratics</p>
           </div>
           <div class="large-9 columns">
             <ul class="inline-list right">
