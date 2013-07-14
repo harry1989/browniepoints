@@ -70,7 +70,7 @@
                   <label class="inline">EMAIL (required)</label>
                 </div>
                 <div class="large-6 columns">
-                  <input type="text" id='pEmail' placeholder="">
+                  <input type="text" id='pEmail' disabled placeholder="">
                 </div>
                 <div class="large-2 columns">&nbsp;</div>
               </div> 
@@ -204,7 +204,6 @@
     <script>
       $(document).foundation();
     </script>
-    <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/profile.js"></script>
     <script type="text/javascript" src="js/masonry.pkgd.min.js"></script>
   </body>

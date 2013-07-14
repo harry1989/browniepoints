@@ -2,6 +2,7 @@
 	console.log('Loaded...');
 	// setLocation();
 	loadQuestions();
+	setupUser();
 });
 
 function setLocation() {
@@ -148,4 +149,11 @@ function addQuestion() {
 		console.log('Added!');
 	});
 
+}
+
+function setupUser() {
+	if(user_email) {
+		$('#signInLink').text(user_email);
+		$('#signInLink').attr('href', '/p');
+	}
 }
