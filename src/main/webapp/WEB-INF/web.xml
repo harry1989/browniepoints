@@ -33,6 +33,12 @@
 		<display-name>AddQuestionServlet</display-name>
 		<description></description>
 		<servlet-class>main.java.browniepoints.servlet.AddQuestionServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ProfileServlet</servlet-name>
+		<display-name>ProfileServlet</display-name>
+		<description></description>
+		<servlet-class>main.java.browniepoints.servlet.ProfileServlet</servlet-class>
 	</servlet>	
 	<servlet-mapping>
 		<servlet-name>QuestionServlet</servlet-name>
@@ -53,6 +59,10 @@
 	<servlet-mapping>
 		<servlet-name>AddQuestionServlet</servlet-name>
 		<url-pattern>/aq</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ProfileServlet</servlet-name>
+		<url-pattern>/p</url-pattern>
 	</servlet-mapping>
 
 </web-app>

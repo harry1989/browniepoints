@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.java.browniepoints.model.CompositeQuestion;
 import main.java.browniepoints.model.helper.QuestionHelper;
+import main.java.browniepoints.model.helper.UserHelper;
 import main.java.browniepoints.util.Util;
 
 /**
@@ -33,12 +34,9 @@ public class QuestionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String uid = request.getParameter("uid");
-		if (Util.isNullOrEmpty(uid))
-			return;
-
+		Integer uid = UserHelper.getInstance().getLoggedInUid();
 		List<CompositeQuestion> questions = QuestionHelper.getInstance()
-				.getQuestionsForUser(Integer.parseInt(uid));
+				.getQuestionsForUser(uid);
 		if (null == questions || questions.size() == 0)
 			return;
 
@@ -53,8 +51,8 @@ public class QuestionServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			response.getWriter().println(e.getMessage());
-		}		
-		
+		}
+
 		Util.convertToJSON(ret, response);
 	}
 
