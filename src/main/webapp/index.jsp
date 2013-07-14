@@ -51,7 +51,7 @@
         <ul class="inline-list right">
           <li><a href="#" class="y-geo">HYDERABAD</a></li>
           <li data-reveal-id="addQuestion"><a href="#" class="y-cap">ADD QUESTION</a></li>
-          <li data-reveal-id="signIn"><a href="profile.html" id=signInLink" class="y-cap">SIGN IN</a></li>
+          <li data-reveal-id="signIn"><a href="profile.html" id="signInLink" class="y-cap">SIGN IN</a></li>
         </ul>
       </div>
     </div>
