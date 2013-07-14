@@ -71,8 +71,11 @@ public class ProfileServlet extends HttpServlet {
 				.getAllQuestions();
 		List<Attempt> attempts = AttemptHelper.getInstance().getAttempt(uid);
 		Set<Integer> qids = new HashSet<Integer>();
-		for (Attempt a : attempts) {
-			qids.add(a.getQid());
+
+		if (attempts != null && !attempts.isEmpty()) {
+			for (Attempt a : attempts) {
+				qids.add(a.getQid());
+			}
 		}
 
 		m.put("my_q", lst);
@@ -89,38 +92,40 @@ public class ProfileServlet extends HttpServlet {
 
 		String userJson = Util.convertToJSON(ret);
 		request.setAttribute("userJson", userJson);
-		getServletContext().getRequestDispatcher("/profile.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/profile.jsp").forward(
+				request, response);
 		return;
 	}
 
-//	public static void test() throws IOException {
-//		Integer uid = 1;
-//
-//		Map<String, List<CompositeQuestion>> m = new HashMap<String, List<CompositeQuestion>>();
-//		List<CompositeQuestion> lst = QuestionHelper.getInstance()
-//				.getQuestionsForUser(uid);
-//		List<CompositeQuestion> fullLst = QuestionHelper.getInstance()
-//				.getAllQuestions();
-//		List<Attempt> attempts = AttemptHelper.getInstance().getAttempt(uid);
-//		Set<Integer> qids = new HashSet<Integer>();
-//		for (Attempt a : attempts) {
-//			qids.add(a.getQid());
-//		}
-//
-//		m.put("my_q", lst);
-//
-//		for (CompositeQuestion q : fullLst) {
-//			if (qids.contains(q.getQ().getQid())) {
-//				Util.addToMap(m, "my_a", q);
-//			}
-//		}
-//
-//		Profile ret = new Profile();
-//		ret.setRet(m);
-//		ret.setUser(UserHelper.getInstance().getUser(uid));
-//
-//		System.out.println(Util.convertToJSON(ret));
-//	}
+	// public static void test() throws IOException {
+	// Integer uid = 1;
+	//
+	// Map<String, List<CompositeQuestion>> m = new HashMap<String,
+	// List<CompositeQuestion>>();
+	// List<CompositeQuestion> lst = QuestionHelper.getInstance()
+	// .getQuestionsForUser(uid);
+	// List<CompositeQuestion> fullLst = QuestionHelper.getInstance()
+	// .getAllQuestions();
+	// List<Attempt> attempts = AttemptHelper.getInstance().getAttempt(uid);
+	// Set<Integer> qids = new HashSet<Integer>();
+	// for (Attempt a : attempts) {
+	// qids.add(a.getQid());
+	// }
+	//
+	// m.put("my_q", lst);
+	//
+	// for (CompositeQuestion q : fullLst) {
+	// if (qids.contains(q.getQ().getQid())) {
+	// Util.addToMap(m, "my_a", q);
+	// }
+	// }
+	//
+	// Profile ret = new Profile();
+	// ret.setRet(m);
+	// ret.setUser(UserHelper.getInstance().getUser(uid));
+	//
+	// System.out.println(Util.convertToJSON(ret));
+	// }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -140,7 +145,7 @@ public class ProfileServlet extends HttpServlet {
 
 	public static void main(String[] args) throws IOException {
 		ProfileServlet obj = new ProfileServlet();
-//		 obj.test();
+		// obj.test();
 	}
 
 }
