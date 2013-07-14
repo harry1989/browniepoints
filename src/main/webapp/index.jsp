@@ -270,13 +270,14 @@
         <div class="panel">
           <h6>{{q.title}}</h6>
           <div class="row">
-          <div class="large-6 columns subheader"><span class="y-hint">{{c.title}}</span></div>  
-          <div class="y-likesplays large-6 columns subheader text-right">
-            <span>&#9654;&nbsp;{{q.likes}}</span>&nbsp;
-            <span>&#10084;&nbsp;{{q.plays}}</span>    
+            <div class="large-6 columns subheader"><span class="y-hint">{{c.title}}</span></div>  
+            <div class="y-likesplays large-6 columns subheader text-right">
+              <span>&#9654;&nbsp;{{q.likes}}</span>&nbsp;
+              <span>&#10084;&nbsp;{{q.plays}}</span>    
+            </div>
           </div>
         </div>
-      </div>
+       </div>
     </script> 
     
     <script id="full-question-template" type="text/handlebars-template">
