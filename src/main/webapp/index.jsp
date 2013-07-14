@@ -365,10 +365,10 @@
                 <li>
                   <div class="row">
                     <a title="Like on Facebook"target="_blank" 
-                      href="http://www.facebook.com/sharer/sharer.php?u=http://bonappetit.com" 
+                      href="http://www.facebook.com/sharer/sharer.php?u=http://gentle-badlands-2040.herokuapp.com/main" 
                       class="foundicon-facebook y-social">&nbsp;&nbsp;&nbsp;</a>
                     <a title="+1 on Google+"target="_blank" 
-                      href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://bonappetit.com" 
+                      href="https://plusone.google.com/_/+1/confirm?hl=en&url=http://gentle-badlands-2040.herokuapp.com/main" 
                       class="foundicon-google-plus y-social">&nbsp;&nbsp;&nbsp;</a>                  
                   </div>
                 </li>
