@@ -41,8 +41,8 @@ public class ProfileServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		Integer uid = UserHelper.getInstance().getLoggedInUid();
 		String email = UserHelper.getInstance().getUser(uid).getEmail();
-		Object name = request.getAttribute("name");
-		Object phone = request.getAttribute("phone");
+		Object name = request.getParameter("name");
+		Object phone = request.getParameter("phone");
 
 		UserHelper.getInstance().update(
 				new User(uid, email, name == null ? "" : (String) name,
