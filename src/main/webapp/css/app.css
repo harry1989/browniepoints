@@ -44,3 +44,8 @@
 .y-incorrect {
 	color: red !important;
 }
+
+.y-likesplays {
+  color: #999 !important  ;
+  font-size:13px;
+}

@@ -273,7 +273,7 @@
             <div class="large-6 columns subheader"><span class="y-hint">{{c.title}}</span></div>  
             <div class="y-likesplays large-6 columns subheader text-right">
               <span>&#9654;&nbsp;{{q.likes}}</span>&nbsp;
-              <span>&#10084;&nbsp;{{q.plays}}</span>    
+              <span>&#10084;&nbsp;{{q.played}}</span>    
             </div>
           </div>
         </div>
@@ -317,7 +317,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="panel">{{c.title}}</div>
+            <div class="panel">{{c.desc}}</div>
           </div>
           <div class="row">&nbsp;</div>
           <div class="row">&nbsp;</div>
@@ -356,7 +356,7 @@
                 {{{header}}}<br/><br/>
                 Correct Answer: <b>{{q.answer}}</b><br/><br/>                
                 {{#if correct}}
-                <b>{{c.desc}}</b> <br/><br/>
+                <b>{{c.desc}} at {{r.name}}</b> <br/><br/>
                 <div>Voucher code: <span class='y-voucher'>{{voucher_code}}</span><br/><br/>
                   A copy of this has been emailed to you.
                 </div>
