@@ -34,7 +34,7 @@ import org.expressme.openid.OpenIdManager;
  */
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String APP_URL = "http://gentle-badlands-2040.herokuapp.com/"; 
+	private static final String APP_URL = "http://boiling-mountain-6229.herokuapp.com/"; 
 
 	private OpenIdManager manager = null;
 
