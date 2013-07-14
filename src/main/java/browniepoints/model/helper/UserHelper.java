@@ -21,6 +21,7 @@ public class UserHelper implements SQLConverter {
 	}
 
 	public void setLoggedInUid(Integer loggedInUid) {
+		System.out.println("Setting uid to " + loggedInUid);
 		this.loggedInUid = loggedInUid;
 	}
 

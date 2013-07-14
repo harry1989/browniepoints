@@ -349,8 +349,7 @@ public class QuestionHelper implements SQLConverter {
 			new Thread(new Runnable() {
 				public void run() {
 					AttemptHelper.getInstance().insert(
-							new Attempt(UserHelper.getInstance()
-									.getLoggedInUid(), qid, "Y", System
+							new Attempt(uid, qid, "Y", System
 									.currentTimeMillis(), -1));
 				}
 			}).start();
@@ -362,8 +361,7 @@ public class QuestionHelper implements SQLConverter {
 			new Thread(new Runnable() {
 				public void run() {
 					AttemptHelper.getInstance().insert(
-							new Attempt(UserHelper.getInstance()
-									.getLoggedInUid(), qid, "N", System
+							new Attempt(uid, qid, "N", System
 									.currentTimeMillis(), -1));
 				}
 			}).start();
