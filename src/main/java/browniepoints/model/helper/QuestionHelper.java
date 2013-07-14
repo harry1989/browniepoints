@@ -303,8 +303,8 @@ public class QuestionHelper implements SQLConverter {
 		update(q);
 	}
 
-	public CompositeQuestion evaluateAnswer(final Integer uid, Integer qid,
-			String userAnswer) throws Exception {
+	public CompositeQuestion evaluateAnswer(final Integer uid,
+			final Integer qid, String userAnswer) throws Exception {
 		CompositeQuestion ret = questionByQID.get(qid);
 
 		if (ret == null)
@@ -327,11 +327,11 @@ public class QuestionHelper implements SQLConverter {
 			final String code = vCode.substring(0, length);
 			ret.setVoucher_code(code);
 
-			//new Thread(new Runnable() {
-				//public void run() {
-					//VoucherHelper.getInstance().insert(cid, uid, code);
-				//}
-			//}).start();
+			new Thread(new Runnable() {
+				public void run() {
+					VoucherHelper.getInstance().insert(cid, uid, code);
+				}
+			}).start();
 
 			ret.getC().setQuota(ret.getC().getQuota() - 1);
 			if (ret.getC().getQuota() == 0) {
@@ -339,19 +339,41 @@ public class QuestionHelper implements SQLConverter {
 				noOfferQuestions.add(ret);
 			}
 			final Coupon newC = ret.getC().copyOf();
-/*			new Thread(new Runnable() {
+			new Thread(new Runnable() {
 				public void run() {
 					CouponHelper.getInstance().update(newC);
 				}
-			}).start();*/
+			}).start();
+
+			// Insert into attempts table.
+			new Thread(new Runnable() {
+				public void run() {
+					AttemptHelper.getInstance().insert(
+							new Attempt(UserHelper.getInstance()
+									.getLoggedInUid(), qid, "Y", System
+									.currentTimeMillis(), -1));
+				}
+			}).start();
 		} else {
 			ret.setAnswer_status("N");
 			ret.setVoucher_code("");
+
+			// Insert into attempts table.
+			new Thread(new Runnable() {
+				public void run() {
+					AttemptHelper.getInstance().insert(
+							new Attempt(UserHelper.getInstance()
+									.getLoggedInUid(), qid, "N", System
+									.currentTimeMillis(), -1));
+				}
+			}).start();
 		}
 
-		// Insert into attempts table.
-
 		return ret;
+	}
+	
+	public List<CompositeQuestion> getAllQuestions() {
+		return this.questions;
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -376,11 +398,11 @@ public class QuestionHelper implements SQLConverter {
 		// "Barbeque-Nation"));
 
 		// QuestionHelper.getInstance().likeQuestion(2);
-//		List<CompositeQuestion> lst = QuestionHelper.getInstance()
-//				.getQuestionsForUser(1);
-//		for (CompositeQuestion q : lst) {
-//			System.out.println(q);
-//		}
-//		Question nq = new Question(2, 
+		// List<CompositeQuestion> lst = QuestionHelper.getInstance()
+		// .getQuestionsForUser(1);
+		// for (CompositeQuestion q : lst) {
+		// System.out.println(q);
+		// }
+		// Question nq = new Question(2,
 	}
 }
