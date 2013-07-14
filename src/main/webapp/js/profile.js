@@ -1,7 +1,9 @@
 ﻿$(function() {
     console.log('Loaded...');
+    loadProfile();
     showAnswers();
     showQuestions();
+    
 });
 
 function showAnswers() {
@@ -53,4 +55,19 @@ function showQuestions() {
 
 function getRandomInt (min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function loadProfile() {
+	console.log('In loadProfile..');
+	if(!user_json) {
+		alert('OOPS: No user info!');
+	}
+	$('#pUserName').val(user_json.user.email);
+	$('#pFullName').val(user_json.user.name);
+	$('#pEmail').val(user_json.user.email);
+	
+}
+
+function saveProfile() {
+	console.log('In saveProfile..');
 }

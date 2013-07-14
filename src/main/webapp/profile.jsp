@@ -52,7 +52,7 @@
                   <label class="inline">USERNAME (required)</label>
                 </div>
                 <div class="large-6 columns">
-                  <input type="text" placeholder="rajorshi">
+                  <input type="text" disabled id='pUserName' placeholder="">
                 </div>
                 <div class="large-2 columns">&nbsp;</div>
               </div>
@@ -61,7 +61,7 @@
                   <label class="inline">FULL NAME (required)</label>
                 </div>
                 <div class="large-6 columns">
-                  <input type="text" placeholder="Rajorshi Biswas">
+                  <input type="text" id='pFullName' placeholder="">
                 </div>
                 <div class="large-2 columns">&nbsp;</div>
               </div>                 
@@ -70,25 +70,7 @@
                   <label class="inline">EMAIL (required)</label>
                 </div>
                 <div class="large-6 columns">
-                  <input type="text" placeholder="rajorshi.biswas@gmail.com">
-                </div>
-                <div class="large-2 columns">&nbsp;</div>
-              </div> 
-              <div class="row">
-                <div class="large-4 columns text-right">
-                  <label class="inline">PASSWORD (required)</label>
-                </div>
-                <div class="large-6 columns">
-                  <input type="text" placeholder="Click to change">
-                </div>
-                <div class="large-2 columns">&nbsp;</div>
-              </div> 
-              <div class="row">
-                <div class="large-4 columns text-right">
-                  <label class="inline">CONFIRM PASSWORD (required)</label>
-                </div>
-                <div class="large-6 columns">
-                  <input type="text" placeholder="Click to change">
+                  <input type="text" id='pEmail' placeholder="">
                 </div>
                 <div class="large-2 columns">&nbsp;</div>
               </div> 
@@ -97,7 +79,7 @@
                   <label class="inline">MOBILE NUMBER</label>
                 </div>
                 <div class="large-6 columns">
-                  <input type="text" placeholder="9849434263">
+                  <input type="text" placeholder="Enter 10 digit mobile number">
                 </div>
                 <div class="large-2 columns">&nbsp;</div>
               </div>  
@@ -131,7 +113,7 @@
                   <label class="inline">SAVE CHANGES</label>
                 </div>
                 <div class="large-2 columns">
-                  <a class="button success small y-full-width" href="#.">SUBMIT</a>
+                  <a class="button success small y-full-width" href="javascript:saveProfile();">SUBMIT</a>
                 </div>                
                 <div class="large-6 columns">&nbsp;</div>
               </div>                                                                                                           
