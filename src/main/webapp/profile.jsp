@@ -13,7 +13,8 @@
     <script>
     	<%= request.getAttribute("uid") %>
         var user_email = '<%= session.getAttribute("email") %>';    	
-        var user_info = <%= request.getAttribute("userInfo") %>;
+        var user_json = <%= request.getAttribute("userJson") %>;
+        console.log(user_json);
     	
     </script>  
   </head>
