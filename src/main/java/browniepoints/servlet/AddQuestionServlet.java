@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import main.java.browniepoints.model.Question;
 import main.java.browniepoints.model.helper.QuestionHelper;
 import main.java.browniepoints.model.helper.RestaurantHelper;
+import main.java.browniepoints.model.helper.UserHelper;
 
 /**
  * Servlet implementation class AddQuestionServlet
@@ -47,14 +48,14 @@ public class AddQuestionServlet extends HttpServlet {
 
 		try {
 			QuestionHelper.getInstance().insert(
-					new Question(getInt(request, "uid"), getString(request,
-							"title"), getString(request, "desc"), getString(
-							request, "trivia"), "img",
-							getString(request, "url"), getString(request,
-									"option1"), getString(request, "option2"),
-							getString(request, "option3"), getString(request,
-									"option4"), getString(request, "answer"),
-							RestaurantHelper
+					new Question(UserHelper.getInstance().getLoggedInUid(),
+							getString(request, "title"), getString(request,
+									"desc"), getString(request, "trivia"),
+							"img", getString(request, "url"), getString(
+									request, "option1"), getString(request,
+									"option2"), getString(request, "option3"),
+							getString(request, "option4"), getString(request,
+									"answer"), RestaurantHelper
 									.getInstance()
 									.getRestaurantByName(
 											getString(request, "name"))

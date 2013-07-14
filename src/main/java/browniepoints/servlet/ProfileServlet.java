@@ -1,8 +1,9 @@
 package main.java.browniepoints.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,20 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.java.browniepoints.model.CompositeQuestion;
+import main.java.browniepoints.model.User;
 import main.java.browniepoints.model.helper.QuestionHelper;
 import main.java.browniepoints.model.helper.UserHelper;
 import main.java.browniepoints.util.Util;
 
 /**
- * Servlet implementation class QuestionServlet
+ * Servlet implementation class ProfileServlet
  */
-public class QuestionServlet extends HttpServlet {
+public class ProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public QuestionServlet() {
+	public ProfileServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,36 +36,29 @@ public class QuestionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		Integer uid = UserHelper.getInstance().getLoggedInUid();
-		List<CompositeQuestion> questions = QuestionHelper.getInstance()
-				.getQuestionsForUser(uid);
-		if (null == questions || questions.size() == 0)
-			return;
+		Map<String, List<CompositeQuestion>> ret =
+				new HashMap<String, List<CompositeQuestion>>();
+		List<CompositeQuestion> lst = QuestionHelper.getInstance()
+				.getQuestionsForUser(UserHelper.getInstance().getLoggedInUid());
 
-		List<CompositeQuestion> ret = new ArrayList<CompositeQuestion>();
-		try {
-			for (CompositeQuestion q : questions) {
-				ret.add(Util.toNonRevealMode(q));
-			}
-
-			request.setAttribute("questions", Util.convertToJSON(ret));
-		} catch (CloneNotSupportedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			response.getWriter().println(e.getMessage());
-		}
-
+		ret.put("my_q", lst);
 		Util.convertToJSON(ret, response);
 	}
 
-	@Override
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String like = request.getParameter("like");
-		if (like == null) {
-		} else {
-			QuestionHelper.getInstance().likeQuestion(Integer.parseInt(like));
-		}
+		Integer uid = UserHelper.getInstance().getLoggedInUid();
+		String email = UserHelper.getInstance().getUser(uid).getEmail();
+		Object name = request.getParameter("name");
+		Object phone = request.getParameter("phone");
+
+		UserHelper.getInstance().update(
+				new User(uid, email, name == null ? "" : (String) name, 0,
+						phone == null ? "" : (String) phone));
 	}
 
 }

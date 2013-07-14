@@ -93,7 +93,7 @@ public class LoginServlet extends HttpServlet {
 
 		System.out.println(email);
 		System.out.println(identity);
-		
+
 		boolean userLoggedIn = !Util.isNullOrEmpty(email)
 				&& !Util.isNullOrEmpty(identity);
 
@@ -104,15 +104,28 @@ public class LoginServlet extends HttpServlet {
 					new User(email, email.substring(0, email.indexOf('@')), 0,
 							""));
 
-			request.setAttribute("uid", UserHelper.getInstance().getUser(email)
-					.getUid());
-			request.setAttribute("email", email);
-			request.setAttribute("name", email.substring(0, email.indexOf('@')));
+			Integer uid = UserHelper.getInstance().getUser(email).getUid();
+			request.setAttribute("uid", uid);
+			if (userLoggedIn) {
+				UserHelper.getInstance().setLoggedInUid(uid);
+			}
+
+			request.getSession().setAttribute("email", email);
+			request.getSession().setAttribute("name",
+					email.substring(0, email.indexOf('@')));
 			getServletContext().getRequestDispatcher("/profile.jsp").forward(
 					request, response);
 			System.out.println("new user");
 			return;
 		}
+
+		Integer uid = UserHelper.getInstance().getUser(email).getUid();
+		if (userLoggedIn) {
+			UserHelper.getInstance().setLoggedInUid(uid);
+		}
+		request.getSession().setAttribute("email", email);
+		request.getSession().setAttribute("name",
+				UserHelper.getInstance().getUser(uid).getName());
 
 		List<CompositeQuestion> questions = userLoggedIn ? QuestionHelper
 				.getInstance().getQuestionsForUser(this.uid) : QuestionHelper

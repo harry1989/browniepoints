@@ -14,7 +14,16 @@ import main.java.browniepoints.model.User;
 public class UserHelper implements SQLConverter {
 	private static Connection conn = ConnectionProvider.getConnection();
 	private static final UserHelper instance = new UserHelper();
+	private Integer loggedInUid = null;
 	
+	public Integer getLoggedInUid() {
+		return loggedInUid;
+	}
+
+	public void setLoggedInUid(Integer loggedInUid) {
+		this.loggedInUid = loggedInUid;
+	}
+
 	private static final String INSERT_SQL = "insert into public.\"user\" "
 			+ "(email, name, points, phone) values (?, ?, ?, ?)";
 	private static final String SELECT_SQL = "select uid, email, name, points, phone "

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.java.browniepoints.model.CompositeQuestion;
 import main.java.browniepoints.model.helper.QuestionHelper;
+import main.java.browniepoints.model.helper.UserHelper;
 import main.java.browniepoints.util.Util;
 
 /**
@@ -42,12 +43,10 @@ public class AnswerServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String qid = request.getParameter("qid");
 		String answer = request.getParameter("a");
-		String uid = request.getParameter("uid");
 
 		System.out.println(qid + ", " + answer);
 
-		if (Util.isNullOrEmpty(qid) || Util.isNullOrEmpty(answer)
-				|| Util.isNullOrEmpty(uid)) {
+		if (Util.isNullOrEmpty(qid) || Util.isNullOrEmpty(answer)) {
 			request.setAttribute("response", null);
 			return;
 		}
@@ -55,7 +54,8 @@ public class AnswerServlet extends HttpServlet {
 		CompositeQuestion ret = null;
 		try {
 			ret = QuestionHelper.getInstance().evaluateAnswer(
-					Integer.parseInt(uid), Integer.parseInt(qid), answer);
+					UserHelper.getInstance().getLoggedInUid(),
+					Integer.parseInt(qid), answer);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
