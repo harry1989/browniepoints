@@ -152,8 +152,9 @@ function addQuestion() {
 }
 
 function setupUser() {
-	if(user_email) {
+	if(user_email && user_email != 'null') {
 		$('#signInLink').text(user_email);
 		$('#signInLink').attr('href', '/p');
+		$('#signInLink').parent().removeAttr('data-reveal-id');
 	}
 }
