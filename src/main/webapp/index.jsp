@@ -15,7 +15,7 @@
 	
 	<script>
 		var questions = <%= request.getAttribute("questions") %>;
-		var user_email = '<%= request.getAttribute("email") %>';
+		var user_email = '<%= session.getAttribute("email") %>';
 	</script>
 	    
   </head>
